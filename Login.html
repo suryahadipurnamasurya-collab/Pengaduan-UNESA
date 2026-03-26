@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Masuk Akun</title>
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body class="login-page">
+    <div class="card" aria-label="Masuk Akun">
+      <header class="card-header">
+        <a class="back-btn" href="index.html">←</a>
+        <h1 id="page-title">Login</h1>
+        <div class="tab-nav" role="tablist">
+          <button
+            id="tab-login"
+            class="active"
+            role="tab"
+            aria-selected="true"
+            aria-controls="panel-login"
+          >
+            Login
+          </button>
+          <button
+            id="tab-signup"
+            role="tab"
+            aria-selected="false"
+            aria-controls="panel-signup"
+          >
+            Sign up
+          </button>
+        </div>
+      </header>
+
+      <div class="card-body">
+        <section
+          id="panel-login"
+          class="tab-panel active"
+          role="tabpanel"
+          aria-labelledby="tab-login"
+        >
+          <h2>Selamat datang kembali</h2>
+          <form id="login-form">
+            <div class="field">
+              <label for="login-email">Email Mahasiswa</label>
+              <input
+                id="login-email"
+                type="email"
+                placeholder="example@mhs.unesa.ac.id"
+                required
+              />
+            </div>
+
+            <div class="field">
+              <label for="login-password">Password</label>
+              <input
+                id="login-password"
+                type="password"
+                placeholder="Masukkan password"
+                required
+              />
+            </div>
+
+            <div class="actions">
+              <button type="submit">Masuk</button>
+            </div>
+
+            <p class="hint">
+              Belum punya akun? Klik tab "Sign up" untuk mendaftar.
+            </p>
+          </form>
+        </section>
+
+        <section
+          id="panel-signup"
+          class="tab-panel"
+          role="tabpanel"
+          aria-labelledby="tab-signup"
+        >
+          <h2>Selamat datang</h2>
+          <form id="signup-form">
+            <div class="field">
+              <label for="signup-name">Nama</label>
+              <input
+                id="signup-name"
+                type="text"
+                placeholder="Nama lengkap"
+                required
+              />
+            </div>
+
+            <div class="field">
+              <label for="signup-email">Email Mahasiswa</label>
+              <input
+                id="signup-email"
+                type="email"
+                placeholder="example@mhs.unesa.ac.id"
+                required
+              />
+            </div>
+
+            <div class="field">
+              <label for="signup-faculty">Fakultas</label>
+              <input
+                id="signup-faculty"
+                type="text"
+                placeholder="Fakultas"
+                required
+              />
+            </div>
+
+            <div class="field">
+              <label for="signup-major">Prodi</label>
+              <input
+                id="signup-major"
+                type="text"
+                placeholder="Program studi"
+                required
+              />
+            </div>
+
+            <div class="field">
+              <label for="signup-address">Alamat</label>
+              <textarea
+                id="signup-address"
+                rows="3"
+                placeholder="Alamat lengkap"
+                required
+              ></textarea>
+            </div>
+
+            <div class="field">
+              <label for="signup-password">Password Baru</label>
+              <input
+                id="signup-password"
+                type="password"
+                placeholder="Buat password"
+                required
+              />
+            </div>
+
+            <div class="field">
+              <label for="signup-confirm">Konfirmasi Password</label>
+              <input
+                id="signup-confirm"
+                type="password"
+                placeholder="Ulangi password"
+                required
+              />
+            </div>
+
+            <div class="actions">
+              <button type="submit">Daftar</button>
+            </div>
+
+            <p class="hint">Sudah punya akun? Klik tab "Login" untuk masuk.</p>
+          </form>
+        </section>
+      </div>
+    </div>
+
+    <script>
+      const tabLogin = document.getElementById("tab-login");
+      const tabSignup = document.getElementById("tab-signup");
+      const panelLogin = document.getElementById("panel-login");
+      const panelSignup = document.getElementById("panel-signup");
+      const pageTitle = document.getElementById("page-title");
+      const loginForm = document.getElementById("login-form");
+      const signupForm = document.getElementById("signup-form");
+
+      function updateTab(activeTab) {
+        const isLogin = activeTab === "login";
+
+        tabLogin.classList.toggle("active", isLogin);
+        tabLogin.setAttribute("aria-selected", String(isLogin));
+        tabSignup.classList.toggle("active", !isLogin);
+        tabSignup.setAttribute("aria-selected", String(!isLogin));
+
+        panelLogin.classList.toggle("active", isLogin);
+        panelSignup.classList.toggle("active", !isLogin);
+
+        pageTitle.textContent = isLogin ? "Login" : "Sign up";
+
+        if (isLogin) {
+          panelLogin.querySelector("input").focus();
+        } else {
+          panelSignup.querySelector("input").focus();
+        }
+      }
+
+      tabLogin.addEventListener("click", () => updateTab("login"));
+      tabSignup.addEventListener("click", () => updateTab("signup"));
+
+      loginForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+
+        const email = document.getElementById("login-email").value;
+
+        if (email) {
+          localStorage.setItem("userEmail", email);
+        }
+
+        window.location.href = "main.html";
+      });
+
+      signupForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const password = document.getElementById("signup-password").value;
+        const confirm = document.getElementById("signup-confirm").value;
+        const name = document.getElementById("signup-name").value;
+
+        if (password !== confirm) {
+          alert("Password dan konfirmasi tidak cocok.");
+          return;
+        }
+
+        localStorage.setItem("userName", name);
+
+        window.location.href = "main.html";
+      });
+
+      [tabLogin, tabSignup].forEach((tab) => {
+        tab.addEventListener("keydown", (event) => {
+          if (event.key === "ArrowLeft" || event.key === "ArrowRight") {
+            event.preventDefault();
+            const next = event.key === "ArrowRight" ? tabSignup : tabLogin;
+            next.focus();
+          }
+
+          if (event.key === "Enter" || event.key === " ") {
+            event.preventDefault();
+            tab.click();
+          }
+        });
+      });
+
+      if (window.location.hash === "#signup") {
+        updateTab("signup");
+      }
+    </script>
+  </body>
+</html>

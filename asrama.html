@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Asrama Mahasiswa - UNESA</title>
+    <link rel="stylesheet" href="main.css" />
+    <style>
+      .asrama-hero {
+        background: linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #b45309 100%), radial-gradient(circle at 20% 50%, rgba(255,255,255,0.3) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(255,255,255,0.4) 0%, transparent 50%);
+        background-size: 400% 400%, 100% 100%, 100% 100%;
+        animation: gradientShift 8s ease-in-out infinite, shimmer 3s ease-in-out infinite alternate;
+        border-radius: 25px;
+        padding: 70px 40px;
+        text-align: center;
+        margin-top: -20px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 40px rgba(245, 158, 11, 0.3);
+        min-height: 450px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 24px;
+        color: white;
+        border: 1px solid rgba(255,255,255,0.2);
+        backdrop-filter: blur(15px);
+      }
+
+      @keyframes gradientShift {
+        0%, 100% { background-position: 0% 50%, center, center; }
+        50% { background-position: 100% 50%, center, center; }
+      }
+
+      @keyframes shimmer {
+        0% { box-shadow: 0 0 20px rgba(255,255,255,0.5); }
+        100% { box-shadow: 0 0 40px rgba(255,255,255,0.8), 0 0 60px rgba(245, 158, 11, 0.4); }
+      }
+
+      .asrama-hero h1 {
+        font-size: 2.8rem;
+        font-weight: 900;
+        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+        margin: 0;
+        letter-spacing: -0.02em;
+        position: relative;
+        z-index: 2;
+      }
+
+      .asrama-hero p {
+        font-size: 1.25rem;
+        max-width: 750px;
+        margin: 0 auto;
+        line-height: 1.7;
+        backdrop-filter: blur(10px);
+        background: rgba(255,255,255,0.1);
+        padding: 20px 30px;
+        border-radius: 20px;
+        border: 1px solid rgba(255,255,255,0.2);
+        position: relative;
+        z-index: 2;
+      }
+
+      .asrama-info {
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 0 20px;
+      }
+
+      .section-header {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .section-header h2 {
+        color: #78350f;
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 12px;
+      }
+
+      .section-header p {
+        color: #64748b;
+        font-size: 1.1rem;
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 24px;
+        margin-bottom: 40px;
+      }
+
+      .feature-card {
+        background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+        border-radius: 20px;
+        padding: 32px 24px;
+        text-align: center;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        border: 1px solid #e2e8f0;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .feature-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #fbbf24, #f59e0b, #d97706);
+        background-size: 200% 100%;
+        transform: translateX(-100%);
+        transition: transform 0.6s ease;
+      }
+
+      .feature-card:hover::before {
+        transform: translateX(100%);
+      }
+
+      .feature-card:hover {
+        transform: translateY(-12px) scale(1.02);
+        box-shadow: 0 25px 60px rgba(245, 158, 11, 0.25);
+        border-color: #f59e0b;
+      }
+
+      .feature-link {
+        text-decoration: none;
+        color: inherit;
+        display: block;
+      }
+
+      .feature-icon {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        font-size: 2.2rem;
+        box-shadow: 0 8px 25px rgba(245, 158, 11, 0.3);
+      }
+
+      .feature-card h3 {
+        color: #78350f;
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 16px;
+      }
+
+      .feature-card p {
+        color: #64748b;
+        font-size: 1rem;
+        line-height: 1.7;
+        margin: 0;
+      }
+
+      .access-info {
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        border-radius: 20px;
+        padding: 40px;
+        text-align: center;
+        margin-top: 40px;
+      }
+
+      .access-info h3 {
+        color: #78350f;
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+      }
+
+      .action-buttons {
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        margin-top: 20px;
+        flex-wrap: wrap;
+      }
+
+      .access-btn {
+        display: inline-block;
+        padding: 14px 32px;
+        background: linear-gradient(135deg, #f59e0b 0%, #b45309 100%);
+        color: white;
+        text-decoration: none;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        transition: all 0.3s;
+        box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
+      }
+
+      .access-btn.secondary {
+        background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+        box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+      }
+
+      .access-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 35px rgba(245, 158, 11, 0.5);
+      }
+
+      .access-btn.secondary:hover {
+        box-shadow: 0 12px 35px rgba(59, 130, 246, 0.5);
+      }
+
+      @media (max-width: 768px) {
+        .asrama-hero h1 { font-size: 2rem; }
+        .asrama-hero p { font-size: 1rem; }
+        .features-grid { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body class="main-page">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="topbar-profile" id="profileBtn">Profil</button>
+        <div class="topbar-user-info">
+          <span class="topbar-greeting" id="userGreeting">Hallo!!</span>
+          <span class="topbar-user" id="userName">Nama Mahasiswa</span>
+        </div>
+      </div>
+      <nav class="topbar-nav" aria-label="Menu utama">
+        <div class="nav-item">
+          <a href="main.html">Home</a>
+        </div>
+        <div class="nav-item">
+          <a href="informasi.html">Informasi</a>
+        </div>
+        <div class="nav-item">
+          <a href="pengaduan.html">Pengaduan</a>
+        </div>
+        <div class="nav-item">
+          <a href="feedback.html">Feedback</a>
+        </div>
+      </nav>
+      <div class="topbar-actions">
+        <a class="btn" href="Login.html" id="loginBtn">Login</a>
+        <a class="btn btn-primary" href="Login.html#signup" id="signupBtn">Sign Up</a>
+        <button class="hamburger-menu" id="hamburgerBtn">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <button class="settings-menu" id="settingsBtn" style="display: flex !important;">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </header>
+
+    <div class="hamburger-dropdown" id="hamburgerDropdown"></div>
+    <div class="settings-dropdown" id="settingsDropdown">
+      <a href="#" id="editProfileBtn">Edit Profile</a>
+      <a href="#">Setting</a>
+      <button id="logoutBtn">Log Out</button>
+    </div>
+
+    <main class="asrama-info">
+      <section class="asrama-hero">
+        <h1>🏠 Asrama Mahasiswa UNESA</h1>
+        <p>Menyediakan hunian yang aman, nyaman, dan kondusif bagi mahasiswa dari luar daerah. Dilengkapi dengan fasilitas pendukung belajar dan keamanan 24 jam untuk menunjang kesuksesan akademik Anda.</p>
+      </section>
+
+      <div class="section-header">
+        <h2>Fasilitas Asrama</h2>
+        <p>Berbagai fasilitas yang kami sediakan untuk kenyamanan tinggal Anda</p>
+      </div>
+
+      <div class="features-grid">
+        <a href="#" class="feature-link">
+          <div class="feature-card">
+            <div class="feature-icon">🛏️</div>
+            <h3>Kamar Full Furnished</h3>
+            <p>Setiap kamar dilengkapi dengan tempat tidur, lemari pakaian, meja belajar, dan kursi untuk kenyamanan maksimal.</p>
+          </div>
+        </a>
+        <a href="#" class="feature-link">
+          <div class="feature-card">
+            <div class="feature-icon">👮</div>
+            <h3>Keamanan 24 Jam</h3>
+            <p>Sistem keamanan ketat dengan pengawasan CCTV di area publik dan petugas keamanan yang siaga 24 jam.</p>
+          </div>
+        </a>
+        <a href="#" class="feature-link">
+          <div class="feature-card">
+            <div class="feature-icon">📶</div>
+            <h3>Wi-Fi & Area Belajar</h3>
+            <p>Koneksi internet berkecepatan tinggi dan ruang belajar bersama yang tenang untuk mendukung kegiatan akademik.</p>
+          </div>
+        </a>
+        <a href="#" class="feature-link">
+          <div class="feature-card">
+            <div class="feature-icon">🍳</div>
+            <h3>Fasilitas Bersama</h3>
+            <p>Tersedia dapur umum, ruang cuci, area parkir yang luas, serta kantin di area asrama dengan harga khusus mahasiswa.</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="access-info">
+        <h3>Informasi & Pendaftaran</h3>
+        <p>Kantor Pengelola: Senin - Jumat (08.00 - 15.00 WIB)<br>Pendaftaran asrama diprioritaskan bagi mahasiswa baru dari luar daerah.<br><em>*Ketersediaan kamar dapat berubah sewaktu-waktu.</em></p>
+        <div class="action-buttons">
+          <a href="#" class="access-btn" id="btnInfo">Cek Info Kamar & Biaya</a>
+          <a href="#" class="access-btn secondary" id="btnDaftar">Form Pendaftaran Asrama</a>
+        </div>
+      </div>
+    </main>
+
+    <!-- Modal Info Kamar & Biaya -->
+    <div class="modal" id="infoModal">
+      <div class="modal-content" style="max-width: 800px; text-align: left;">
+        <span class="modal-close" id="closeInfo">&times;</span>
+        <h2 style="text-align: left; color: #78350f; margin-bottom: 20px;">ℹ️ Informasi Tipe Kamar & Biaya</h2>
+        <div style="overflow-x: auto;">
+          <table style="width: 100%; border-collapse: collapse; min-width: 600px; font-size: 0.95rem;">
+            <thead>
+              <tr style="background: #d97706; color: white;">
+                <th style="padding: 12px; border: 1px solid #e2e8f0; text-align: left;">Tipe Kamar</th>
+                <th style="padding: 12px; border: 1px solid #e2e8f0; text-align: left;">Kapasitas</th>
+                <th style="padding: 12px; border: 1px solid #e2e8f0; text-align: left;">Fasilitas Ekstra</th>
+                <th style="padding: 12px; border: 1px solid #e2e8f0; text-align: left;">Biaya / Semester</th>
+                <th style="padding: 12px; border: 1px solid #e2e8f0; text-align: left;">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="padding: 12px; border: 1px solid #e2e8f0; font-weight: 600;">Kamar Reguler A</td>
+                <td style="padding: 12px; border: 1px solid #e2e8f0;">4 Orang</td>
+                <td style="padding: 12px; border: 1px solid #e2e8f0;">Kamar Mandi Luar, Kipas Angin</td>
+                <td style="padding: 12px; border: 1px solid #e2e8f0;">Rp 1.500.000</td>
+                <td style="padding: 12px; border: 1px solid #e2e8f0;"><span style="background: #d1fae5; color: #059669; padding: 4px 8px; border-radius: 12px; font-size: 0.8rem; font-weight: 600;">Tersedia</span></td>
+              </tr>
+              <tr style="background: #f8fafc;">
+                <td style="padding: 12px; border: 1px solid #e2e8f0; font-weight: 600;">Kamar Reguler B</td>
+                <td style="padding: 12px; border: 1px solid #e2e8f0;">2 Orang</td>
+                <td style="padding: 12px; border: 1px solid #e2e8f0;">Kamar Mandi Luar, Kipas Angin</td>
+                <td style="padding: 12px; border: 1px solid #e2e8f0;">Rp 2.000.000</td>
+                <td style="padding: 12px; border: 1px solid #e2e8f0;"><span style="background: #fee2e2; color: #dc2626; padding: 4px 8px; border-radius: 12px; font-size: 0.8rem; font-weight: 600;">Penuh</span></td>
+              </tr>
+              <tr>
+                <td style="padding: 12px; border: 1px solid #e2e8f0; font-weight: 600;">Kamar VIP</td>
+                <td style="padding: 12px; border: 1px solid #e2e8f0;">2 Orang</td>
+                <td style="padding: 12px; border: 1px solid #e2e8f0;">Kamar Mandi Dalam, AC</td>
+                <td style="padding: 12px; border: 1px solid #e2e8f0;">Rp 3.500.000</td>
+                <td style="padding: 12px; border: 1px solid #e2e8f0;"><span style="background: #fef3c7; color: #d97706; padding: 4px 8px; border-radius: 12px; font-size: 0.8rem; font-weight: 600;">Sisa 2 Kamar</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Pendaftaran -->
+    <div class="modal" id="daftarModal">
+      <div class="modal-content" style="max-width: 500px; text-align: left;">
+        <span class="modal-close" id="closeDaftar">&times;</span>
+        <h2 style="text-align: center; color: #78350f; margin-bottom: 20px;">📋 Form Pendaftaran Asrama</h2>
+        <form id="formPendaftaran">
+          <div class="field" style="margin-bottom: 15px;">
+            <label for="daftarNama" style="display: block; margin-bottom: 5px; font-weight: 600;">Nama Lengkap</label>
+            <input type="text" id="daftarNama" required style="width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: 8px; font-family: inherit;">
+          </div>
+          <div class="field" style="margin-bottom: 15px;">
+            <label for="daftarNim" style="display: block; margin-bottom: 5px; font-weight: 600;">NIM / No. Pendaftaran</label>
+            <input type="text" id="daftarNim" required style="width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: 8px; font-family: inherit;">
+          </div>
+          <div style="margin-bottom: 15px; display: flex; gap: 10px;">
+            <div class="field" style="flex: 1;">
+              <label style="display: block; margin-bottom: 5px; font-weight: 600;">Asal Daerah</label>
+              <input type="text" required style="width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: 8px; font-family: inherit;" placeholder="Kota/Kab.">
+            </div>
+            <div class="field" style="flex: 1;">
+              <label style="display: block; margin-bottom: 5px; font-weight: 600;">Jenis Kelamin</label>
+              <select required style="width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: 8px; font-family: inherit;">
+                <option value="">-- Pilih --</option>
+                <option value="L">Laki-laki (Putra)</option>
+                <option value="P">Perempuan (Putri)</option>
+              </select>
+            </div>
+          </div>
+          <div class="field" style="margin-bottom: 15px;">
+            <label style="display: block; margin-bottom: 5px; font-weight: 600;">Pilihan Tipe Kamar</label>
+            <select required style="width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: 8px; font-family: inherit;">
+              <option value="">-- Pilih Tipe Kamar --</option>
+              <option value="Reguler A">Kamar Reguler A (4 Orang)</option>
+              <option value="Reguler B">Kamar Reguler B (2 Orang)</option>
+              <option value="VIP">Kamar VIP (2 Orang)</option>
+            </select>
+          </div>
+          <div class="field" style="margin-bottom: 20px;">
+            <label style="display: block; margin-bottom: 5px; font-weight: 600;">Durasi Sewa</label>
+            <select required style="width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: 8px; font-family: inherit;">
+              <option value="">-- Pilih Durasi --</option>
+              <option value="1 Semester">1 Semester (6 Bulan)</option>
+              <option value="2 Semester">2 Semester (1 Tahun)</option>
+            </select>
+          </div>
+          <button type="submit" style="width: 100%; padding: 12px; background: #f59e0b; color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 1rem; cursor: pointer; transition: background 0.3s;">Kirim Pengajuan</button>
+        </form>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <!-- Sama seperti template footer di halaman lain -->
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Contact Us</h3>
+          <p>📞 (031) 5946262</p>
+          <p>📧 info@unesa.ac.id</p>
+          <p>📍 Jl. Ketintang Surabaya</p>
+        </div>
+        <div class="footer-section">
+          <h3>About Campus</h3>
+          <p>UNESA - Universitas Negeri Surabaya</p>
+          <p>Didirikan tahun 1961</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 Universitas Negeri Surabaya. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      const profileBtn = document.getElementById("profileBtn");
+      const settingsDropdown = document.getElementById("settingsDropdown");
+      const settingsBtn = document.getElementById("settingsBtn");
+      const hamburgerBtn = document.getElementById("hamburgerBtn");
+      const hamburgerDropdown = document.getElementById("hamburgerDropdown");
+
+      window.addEventListener("load", () => {
+        const savedName = localStorage.getItem("userName");
+        if (savedName) {
+          const userElement = document.getElementById("userName");
+          if (userElement) userElement.textContent = savedName;
+          const loginBtn = document.getElementById("loginBtn");
+          const signupBtn = document.getElementById("signupBtn");
+          if (loginBtn) loginBtn.style.display = "none";
+          if (signupBtn) signupBtn.style.display = "none";
+        }
+        const settingsBtnElement = document.getElementById("settingsBtn");
+        if (settingsBtnElement) settingsBtnElement.style.display = "flex";
+      });
+
+      profileBtn?.addEventListener('click', () => {
+        settingsDropdown?.classList.toggle('active');
+        hamburgerDropdown?.classList.remove('active');
+      });
+
+      hamburgerBtn?.addEventListener("click", (e) => {
+        e.stopPropagation();
+        hamburgerDropdown?.classList.toggle("active");
+        settingsDropdown?.classList.remove("active");
+      });
+
+      settingsBtn?.addEventListener("click", (e) => {
+        e.stopPropagation();
+        settingsDropdown?.classList.toggle("active");
+        hamburgerDropdown?.classList.remove("active");
+      });
+
+      // Logika Modal Asrama
+      const btnInfo = document.getElementById("btnInfo");
+      const btnDaftar = document.getElementById("btnDaftar");
+      const infoModal = document.getElementById("infoModal");
+      const daftarModal = document.getElementById("daftarModal");
+      const closeInfo = document.getElementById("closeInfo");
+      const closeDaftar = document.getElementById("closeDaftar");
+      const formPendaftaran = document.getElementById("formPendaftaran");
+
+      btnInfo?.addEventListener("click", (e) => {
+        e.preventDefault();
+        infoModal.style.display = "flex";
+      });
+
+      btnDaftar?.addEventListener("click", (e) => {
+        e.preventDefault();
+        const savedName = localStorage.getItem("userName");
+        if (savedName) {
+          const daftarNama = document.getElementById("daftarNama");
+          if (daftarNama) daftarNama.value = savedName;
+        }
+        daftarModal.style.display = "flex";
+      });
+
+      closeInfo?.addEventListener("click", () => {
+        infoModal.style.display = "none";
+      });
+
+      closeDaftar?.addEventListener("click", () => {
+        daftarModal.style.display = "none";
+      });
+
+      window.addEventListener("click", (e) => {
+        if (!hamburgerDropdown?.contains(e.target) && !hamburgerBtn?.contains(e.target)) {
+          hamburgerDropdown?.classList.remove("active");
+        }
+        if (!settingsDropdown?.contains(e.target) && !profileBtn?.contains(e.target)) {
+          settingsDropdown?.classList.remove("active");
+        }
+        if (e.target === infoModal) infoModal.style.display = "none";
+        if (e.target === daftarModal) daftarModal.style.display = "none";
+      });
+
+      formPendaftaran?.addEventListener("submit", (e) => {
+        e.preventDefault();
+        alert("Pengajuan pendaftaran Asrama berhasil dikirim! Silakan tunggu konfirmasi selanjutnya dari pengelola.");
+        daftarModal.style.display = "none";
+        formPendaftaran.reset();
+      });
+    </script>
+  </body>
+</html>

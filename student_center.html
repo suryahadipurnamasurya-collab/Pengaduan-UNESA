@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Center - UNESA</title>
+    <link rel="stylesheet" href="main.css" />
+    <style>
+      .sc-hero {
+        background: linear-gradient(135deg, #ec4899 0%, #db2777 50%, #9d174d 100%), radial-gradient(circle at 20% 50%, rgba(255,255,255,0.3) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(255,255,255,0.4) 0%, transparent 50%);
+        background-size: 400% 400%, 100% 100%, 100% 100%;
+        animation: gradientShift 8s ease-in-out infinite, shimmer 3s ease-in-out infinite alternate;
+        border-radius: 25px;
+        padding: 70px 40px;
+        text-align: center;
+        margin-top: -20px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 40px rgba(236, 72, 153, 0.3);
+        min-height: 450px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 24px;
+        color: white;
+        border: 1px solid rgba(255,255,255,0.2);
+        backdrop-filter: blur(15px);
+      }
+
+      @keyframes gradientShift {
+        0%, 100% { background-position: 0% 50%, center, center; }
+        50% { background-position: 100% 50%, center, center; }
+      }
+
+      @keyframes shimmer {
+        0% { box-shadow: 0 0 20px rgba(255,255,255,0.5); }
+        100% { box-shadow: 0 0 40px rgba(255,255,255,0.8), 0 0 60px rgba(236, 72, 153, 0.4); }
+      }
+
+      .sc-hero h1 {
+        font-size: 2.8rem;
+        font-weight: 900;
+        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+        margin: 0;
+        letter-spacing: -0.02em;
+        position: relative;
+        z-index: 2;
+      }
+
+      .sc-hero p {
+        font-size: 1.25rem;
+        max-width: 750px;
+        margin: 0 auto;
+        line-height: 1.7;
+        backdrop-filter: blur(10px);
+        background: rgba(255,255,255,0.1);
+        padding: 20px 30px;
+        border-radius: 20px;
+        border: 1px solid rgba(255,255,255,0.2);
+        position: relative;
+        z-index: 2;
+      }
+
+      .sc-info {
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 0 20px;
+      }
+
+      .section-header {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .section-header h2 {
+        color: #831843;
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 12px;
+      }
+
+      .section-header p {
+        color: #64748b;
+        font-size: 1.1rem;
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 24px;
+        margin-bottom: 40px;
+      }
+
+      .feature-card {
+        background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+        border-radius: 20px;
+        padding: 32px 24px;
+        text-align: center;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        border: 1px solid #e2e8f0;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .feature-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #f472b6, #ec4899, #db2777);
+        background-size: 200% 100%;
+        transform: translateX(-100%);
+        transition: transform 0.6s ease;
+      }
+
+      .feature-card:hover::before {
+        transform: translateX(100%);
+      }
+
+      .feature-card:hover {
+        transform: translateY(-12px) scale(1.02);
+        box-shadow: 0 25px 60px rgba(236, 72, 153, 0.25);
+        border-color: #ec4899;
+      }
+
+      .feature-link {
+        text-decoration: none;
+        color: inherit;
+        display: block;
+      }
+
+      .feature-icon {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, #f472b6 0%, #db2777 100%);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        font-size: 2.2rem;
+        box-shadow: 0 8px 25px rgba(236, 72, 153, 0.3);
+      }
+
+      .feature-card h3 {
+        color: #831843;
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 16px;
+      }
+
+      .feature-card p {
+        color: #64748b;
+        font-size: 1rem;
+        line-height: 1.7;
+        margin: 0;
+      }
+
+      .access-info {
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        border-radius: 20px;
+        padding: 40px;
+        text-align: center;
+        margin-top: 40px;
+      }
+
+      .access-info h3 {
+        color: #831843;
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+      }
+
+      .action-buttons {
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        margin-top: 20px;
+        flex-wrap: wrap;
+      }
+
+      .access-btn {
+        display: inline-block;
+        padding: 14px 32px;
+        background: linear-gradient(135deg, #db2777 0%, #9d174d 100%);
+        color: white;
+        text-decoration: none;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        transition: all 0.3s;
+        box-shadow: 0 8px 25px rgba(219, 39, 119, 0.4);
+      }
+
+      .access-btn.secondary {
+        background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
+      }
+
+      .access-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 35px rgba(219, 39, 119, 0.5);
+      }
+
+      .access-btn.secondary:hover {
+        box-shadow: 0 12px 35px rgba(245, 158, 11, 0.5);
+      }
+
+      @media (max-width: 768px) {
+        .sc-hero h1 { font-size: 2rem; }
+        .sc-hero p { font-size: 1rem; }
+        .features-grid { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body class="main-page">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="topbar-profile" id="profileBtn">Profil</button>
+        <div class="topbar-user-info">
+          <span class="topbar-greeting" id="userGreeting">Hallo!!</span>
+          <span class="topbar-user" id="userName">Nama Mahasiswa</span>
+        </div>
+      </div>
+      <nav class="topbar-nav" aria-label="Menu utama">
+        <div class="nav-item">
+          <a href="main.html">Home</a>
+          <div class="nav-dropdown">
+            <a href="#">Dashboard</a>
+            <a href="#">Profil</a>
+            <a href="#">Pengaturan</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="informasi.html">Informasi</a>
+          <div class="nav-dropdown">
+            <a href="informasi.html">Berita Terbaru</a>
+            <a href="informasi.html">Pengumuman</a>
+            <a href="informasi.html">Agenda</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="pengaduan.html">Pengaduan</a>
+          <div class="nav-dropdown">
+            <a href="pengaduan.html">Ajukan Pengaduan</a>
+            <a href="feedback.html">Riwayat Pengaduan</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="feedback.html">Feedback</a>
+          <div class="nav-dropdown">
+            <a href="feedback.html">Kirim Feedback</a>
+            <a href="feedback.html">Riwayat Feedback</a>
+          </div>
+        </div>
+      </nav>
+      <div class="topbar-actions">
+        <a class="btn" href="Login.html" id="loginBtn">Login</a>
+        <a class="btn btn-primary" href="Login.html#signup" id="signupBtn">Sign Up</a>
+        <button class="hamburger-menu" id="hamburgerBtn">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <button class="settings-menu" id="settingsBtn" style="display: flex !important;">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </header>
+
+    <div class="hamburger-dropdown" id="hamburgerDropdown"></div>
+    <div class="settings-dropdown" id="settingsDropdown">
+      <a href="#" id="editProfileBtn">Edit Profile</a>
+      <a href="#">Setting</a>
+      <button id="logoutBtn">Log Out</button>
+    </div>
+
+    <main class="sc-info">
+      <section class="sc-hero">
+        <h1>☕ Student Center UNESA</h1>
+        <p>Jantung kreativitas dan aktivitas mahasiswa. Ruang kolaborasi terbuka yang difasilitasi untuk mendukung berbagai kegiatan organisasi, diskusi kreatif, seni, budaya, hingga pengembangan kepemimpinan mahasiswa.</p>
+      </section>
+
+      <div class="section-header">
+        <h2>Fasilitas Kegiatan</h2>
+        <p>Wadah kreativitas yang siap mendukung pengembangan diri dan organisasi</p>
+      </div>
+
+      <div class="features-grid">
+        <a href="#" class="feature-link">
+          <div class="feature-card">
+            <div class="feature-icon">🛋️</div>
+            <h3>Co-working Space</h3>
+            <p>Area komunal gratis dengan Wi-Fi, bean bags, dan meja luas yang nyaman untuk mengerjakan tugas kelompok atau sekadar berjejaring santai.</p>
+          </div>
+        </a>
+        <a href="#" class="feature-link">
+          <div class="feature-card">
+            <div class="feature-icon">🏢</div>
+            <h3>Sekretariat UKM</h3>
+            <p>Pusat kesekretariatan untuk BEM, DPM, dan puluhan Unit Kegiatan Mahasiswa (UKM) sebagai ruang operasional harian organisasi.</p>
+          </div>
+        </a>
+        <a href="#" class="feature-link">
+          <div class="feature-card">
+            <div class="feature-icon">🎭</div>
+            <h3>Aula & Mini Stage</h3>
+            <p>Panggung mini dan aula multifungsi yang sering digunakan untuk latihan teater, unjuk bakat musik, dan kegiatan seminar mahasiswa.</p>
+          </div>
+        </a>
+        <a href="#" class="feature-link">
+          <div class="feature-card">
+            <div class="feature-icon">🎨</div>
+            <h3>Creative Corner</h3>
+            <p>Sudut khusus yang disediakan untuk pameran karya seni, bazar kewirausahaan mahasiswa, mading interaktif, dan pameran fotografi.</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="access-info">
+        <h3>Informasi & Layanan</h3>
+        <p>Buka setiap hari: 07.00 - 22.00 WIB<br>Pusat kegiatan terbuka bagi seluruh mahasiswa UNESA aktif.<br><em>*Untuk kegiatan berskala besar, diwajibkan mengajukan izin peminjaman tempat.</em></p>
+        <div class="action-buttons">
+          <a href="#" class="access-btn" id="btnUkm">Lihat Daftar UKM</a>
+          <a href="#" class="access-btn secondary" id="btnPinjam">Peminjaman Ruangan</a>
+        </div>
+      </div>
+    </main>
+
+    <!-- Modal Daftar UKM -->
+    <div class="modal" id="ukmModal">
+      <div class="modal-content" style="max-width: 800px; text-align: left;">
+        <span class="modal-close" id="closeUkm">&times;</span>
+        <h2 style="text-align: left; color: #831843; margin-bottom: 20px;">🏢 Daftar Organisasi & UKM</h2>
+        <div style="overflow-x: auto;">
+          <table style="width: 100%; border-collapse: collapse; min-width: 600px; font-size: 0.95rem;">
+            <thead>
+              <tr style="background: #db2777; color: white;">
+                <th style="padding: 12px; border: 1px solid #e2e8f0; text-align: left;">Kategori</th>
+                <th style="padding: 12px; border: 1px solid #e2e8f0; text-align: left;">Nama Organisasi / UKM</th>
+                <th style="padding: 12px; border: 1px solid #e2e8f0; text-align: left;">Lokasi Sekretariat</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="padding: 12px; border: 1px solid #e2e8f0; font-weight: 600;">Legislatif / Eksekutif</td>
+                <td style="padding: 12px; border: 1px solid #e2e8f0;">BEM UNESA, DPM UNESA</td>
+                <td style="padding: 12px; border: 1px solid #e2e8f0;">Lantai 2, Ruang A1 - A2</td>
+              </tr>
+              <tr style="background: #f8fafc;">
+                <td style="padding: 12px; border: 1px solid #e2e8f0; font-weight: 600;">Seni & Budaya</td>
+                <td style="padding: 12px; border: 1px solid #e2e8f0;">UKM Musik, Teater, Paduan Suara</td>
+                <td style="padding: 12px; border: 1px solid #e2e8f0;">Lantai 1, Sayap Timur</td>
+              </tr>
+              <tr>
+                <td style="padding: 12px; border: 1px solid #e2e8f0; font-weight: 600;">Minat & Bakat Khusus</td>
+                <td style="padding: 12px; border: 1px solid #e2e8f0;">MAPALAS (Pencinta Alam), KSR</td>
+                <td style="padding: 12px; border: 1px solid #e2e8f0;">Lantai Dasar, Area Outdoor</td>
+              </tr>
+              <tr style="background: #f8fafc;">
+                <td style="padding: 12px; border: 1px solid #e2e8f0; font-weight: 600;">Keagamaan & Penalaran</td>
+                <td style="padding: 12px; border: 1px solid #e2e8f0;">UKMKI, Pramuka, UKM Jurnalistik</td>
+                <td style="padding: 12px; border: 1px solid #e2e8f0;">Lantai 2, Sayap Barat</td>
+              </tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: #64748b; margin-top: 15px;"><em>*Pendaftaran keanggotaan UKM biasanya dibuka pada awal semester ganjil.</em></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Peminjaman -->
+    <div class="modal" id="pinjamModal">
+      <div class="modal-content" style="max-width: 500px; text-align: left;">
+        <span class="modal-close" id="closePinjam">&times;</span>
+        <h2 style="text-align: center; color: #831843; margin-bottom: 20px;">📝 Form Peminjaman Ruang</h2>
+        <form id="formPeminjaman">
+          <div class="field" style="margin-bottom: 15px;">
+            <label for="pinjamNama" style="display: block; margin-bottom: 5px; font-weight: 600;">Nama Penanggung Jawab / Organisasi</label>
+            <input type="text" id="pinjamNama" required style="width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: 8px; font-family: inherit;">
+          </div>
+          <div class="field" style="margin-bottom: 15px;">
+            <label style="display: block; margin-bottom: 5px; font-weight: 600;">No. WhatsApp</label>
+            <input type="tel" required style="width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: 8px; font-family: inherit;">
+          </div>
+          <div class="field" style="margin-bottom: 15px;">
+            <label style="display: block; margin-bottom: 5px; font-weight: 600;">Pilihan Ruangan</label>
+            <select required style="width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: 8px; font-family: inherit;">
+              <option value="">-- Pilih Area --</option>
+              <option value="Ruang Rapat A">Ruang Rapat Utama (Kapasitas 30 org)</option>
+              <option value="Aula Mini">Aula Pertunjukan Mini</option>
+              <option value="Creative Corner">Area Pameran (Creative Corner)</option>
+            </select>
+          </div>
+          <div style="margin-bottom: 15px; display: flex; gap: 10px;">
+            <div class="field" style="flex: 1;">
+              <label style="display: block; margin-bottom: 5px; font-weight: 600;">Tanggal</label>
+              <input type="date" required style="width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: 8px; font-family: inherit;">
+            </div>
+            <div class="field" style="flex: 1;">
+              <label style="display: block; margin-bottom: 5px; font-weight: 600;">Waktu</label>
+              <input type="time" required style="width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: 8px; font-family: inherit;">
+            </div>
+          </div>
+          <div class="field" style="margin-bottom: 20px;">
+            <label style="display: block; margin-bottom: 5px; font-weight: 600;">Detail Acara / Keperluan</label>
+            <textarea required rows="3" placeholder="Sebutkan estimasi peserta dan nama kegiatan..." style="width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: 8px; resize: vertical; font-family: inherit;"></textarea>
+          </div>
+          <button type="submit" style="width: 100%; padding: 12px; background: #db2777; color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 1rem; cursor: pointer; transition: background 0.3s;">Ajukan Permohonan</button>
+        </form>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <!-- Sama seperti template footer di halaman lain -->
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Contact Us</h3>
+          <p>📞 (031) 5946262</p>
+          <p>📧 info@unesa.ac.id</p>
+          <p>📍 Jl. Ketintang Surabaya</p>
+        </div>
+        <div class="footer-section">
+          <h3>About Campus</h3>
+          <p>UNESA - Universitas Negeri Surabaya</p>
+          <p>Didirikan tahun 1961</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 Universitas Negeri Surabaya. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      const profileBtn = document.getElementById("profileBtn");
+      const settingsDropdown = document.getElementById("settingsDropdown");
+      const settingsBtn = document.getElementById("settingsBtn");
+      const hamburgerBtn = document.getElementById("hamburgerBtn");
+      const hamburgerDropdown = document.getElementById("hamburgerDropdown");
+
+      window.addEventListener("load", () => {
+        const savedName = localStorage.getItem("userName");
+        if (savedName) {
+          const userElement = document.getElementById("userName");
+          if (userElement) userElement.textContent = savedName;
+          const loginBtn = document.getElementById("loginBtn");
+          const signupBtn = document.getElementById("signupBtn");
+          if (loginBtn) loginBtn.style.display = "none";
+          if (signupBtn) signupBtn.style.display = "none";
+        }
+        const settingsBtnElement = document.getElementById("settingsBtn");
+        if (settingsBtnElement) settingsBtnElement.style.display = "flex";
+      });
+
+      profileBtn?.addEventListener('click', () => {
+        settingsDropdown?.classList.toggle('active');
+        hamburgerDropdown?.classList.remove('active');
+      });
+
+      hamburgerBtn?.addEventListener("click", (e) => {
+        e.stopPropagation();
+        hamburgerDropdown?.classList.toggle("active");
+        settingsDropdown?.classList.remove("active");
+      });
+
+      settingsBtn?.addEventListener("click", (e) => {
+        e.stopPropagation();
+        settingsDropdown?.classList.toggle("active");
+        hamburgerDropdown?.classList.remove("active");
+      });
+
+      // Logika Modal Student Center
+      const btnUkm = document.getElementById("btnUkm");
+      const btnPinjam = document.getElementById("btnPinjam");
+      const ukmModal = document.getElementById("ukmModal");
+      const pinjamModal = document.getElementById("pinjamModal");
+      const closeUkm = document.getElementById("closeUkm");
+      const closePinjam = document.getElementById("closePinjam");
+      const formPeminjaman = document.getElementById("formPeminjaman");
+
+      btnUkm?.addEventListener("click", (e) => {
+        e.preventDefault();
+        ukmModal.style.display = "flex";
+      });
+
+      btnPinjam?.addEventListener("click", (e) => {
+        e.preventDefault();
+        const savedName = localStorage.getItem("userName");
+        if (savedName) {
+          const pinjamNama = document.getElementById("pinjamNama");
+          if (pinjamNama) pinjamNama.value = savedName;
+        }
+        pinjamModal.style.display = "flex";
+      });
+
+      closeUkm?.addEventListener("click", () => {
+        ukmModal.style.display = "none";
+      });
+
+      closePinjam?.addEventListener("click", () => {
+        pinjamModal.style.display = "none";
+      });
+
+      window.addEventListener("click", (e) => {
+        if (!hamburgerDropdown?.contains(e.target) && !hamburgerBtn?.contains(e.target)) {
+          hamburgerDropdown?.classList.remove("active");
+        }
+        if (!settingsDropdown?.contains(e.target) && !profileBtn?.contains(e.target)) {
+          settingsDropdown?.classList.remove("active");
+        }
+        if (e.target === ukmModal) ukmModal.style.display = "none";
+        if (e.target === pinjamModal) pinjamModal.style.display = "none";
+      });
+
+      formPeminjaman?.addEventListener("submit", (e) => {
+        e.preventDefault();
+        alert("Pengajuan permohonan peminjaman ruangan berhasil dikirim! Pihak pengelola Student Center akan segera menghubungi Anda.");
+        pinjamModal.style.display = "none";
+        formPeminjaman.reset();
+      });
+    </script>
+  </body>
+</html>

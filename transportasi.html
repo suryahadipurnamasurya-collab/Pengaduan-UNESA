@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Transportasi Kampus - UNESA</title>
+    <link rel="stylesheet" href="main.css" />
+    <style>
+      .trans-hero {
+        background: linear-gradient(135deg, #6366f1 0%, #4f46e5 50%, #3730a3 100%), radial-gradient(circle at 20% 50%, rgba(255,255,255,0.3) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(255,255,255,0.4) 0%, transparent 50%);
+        background-size: 400% 400%, 100% 100%, 100% 100%;
+        animation: gradientShift 8s ease-in-out infinite, shimmer 3s ease-in-out infinite alternate;
+        border-radius: 25px;
+        padding: 70px 40px;
+        text-align: center;
+        margin-top: -20px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 40px rgba(99, 102, 241, 0.3);
+        min-height: 450px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 24px;
+        color: white;
+        border: 1px solid rgba(255,255,255,0.2);
+        backdrop-filter: blur(15px);
+      }
+
+      @keyframes gradientShift {
+        0%, 100% { background-position: 0% 50%, center, center; }
+        50% { background-position: 100% 50%, center, center; }
+      }
+
+      @keyframes shimmer {
+        0% { box-shadow: 0 0 20px rgba(255,255,255,0.5); }
+        100% { box-shadow: 0 0 40px rgba(255,255,255,0.8), 0 0 60px rgba(99, 102, 241, 0.4); }
+      }
+
+      .trans-hero h1 {
+        font-size: 2.8rem;
+        font-weight: 900;
+        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+        margin: 0;
+        letter-spacing: -0.02em;
+        position: relative;
+        z-index: 2;
+      }
+
+      .trans-hero p {
+        font-size: 1.25rem;
+        max-width: 750px;
+        margin: 0 auto;
+        line-height: 1.7;
+        backdrop-filter: blur(10px);
+        background: rgba(255,255,255,0.1);
+        padding: 20px 30px;
+        border-radius: 20px;
+        border: 1px solid rgba(255,255,255,0.2);
+        position: relative;
+        z-index: 2;
+      }
+
+      .trans-info {
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 0 20px;
+      }
+
+      .section-header {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .section-header h2 {
+        color: #312e81;
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 12px;
+      }
+
+      .section-header p {
+        color: #64748b;
+        font-size: 1.1rem;
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 24px;
+        margin-bottom: 40px;
+      }
+
+      .feature-card {
+        background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+        border-radius: 20px;
+        padding: 32px 24px;
+        text-align: center;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        border: 1px solid #e2e8f0;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .feature-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #818cf8, #6366f1, #4f46e5);
+        background-size: 200% 100%;
+        transform: translateX(-100%);
+        transition: transform 0.6s ease;
+      }
+
+      .feature-card:hover::before {
+        transform: translateX(100%);
+      }
+
+      .feature-card:hover {
+        transform: translateY(-12px) scale(1.02);
+        box-shadow: 0 25px 60px rgba(99, 102, 241, 0.25);
+        border-color: #6366f1;
+      }
+
+      .feature-link {
+        text-decoration: none;
+        color: inherit;
+        display: block;
+      }
+
+      .feature-icon {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, #818cf8 0%, #4f46e5 100%);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        font-size: 2.2rem;
+        box-shadow: 0 8px 25px rgba(99, 102, 241, 0.3);
+      }
+
+      .feature-card h3 {
+        color: #312e81;
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 16px;
+      }
+
+      .feature-card p {
+        color: #64748b;
+        font-size: 1rem;
+        line-height: 1.7;
+        margin: 0;
+      }
+
+      .map-section {
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        border-radius: 20px;
+        padding: 40px;
+        margin-bottom: 40px;
+        text-align: center;
+      }
+
+      .map-container {
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        height: 450px;
+        width: 100%;
+        margin-top: 20px;
+        border: 2px solid #e2e8f0;
+      }
+
+      .access-info {
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      .access-info h3 {
+        color: #312e81;
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+      }
+
+      .action-buttons {
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        margin-top: 20px;
+        flex-wrap: wrap;
+      }
+
+      .access-btn {
+        display: inline-block;
+        padding: 14px 32px;
+        background: linear-gradient(135deg, #4f46e5 0%, #312e81 100%);
+        color: white;
+        text-decoration: none;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        transition: all 0.3s;
+        box-shadow: 0 8px 25px rgba(79, 70, 229, 0.4);
+      }
+
+      .access-btn.secondary {
+        background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
+      }
+
+      .access-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 35px rgba(79, 70, 229, 0.5);
+      }
+
+      .access-btn.secondary:hover {
+        box-shadow: 0 12px 35px rgba(245, 158, 11, 0.5);
+      }
+
+      @media (max-width: 768px) {
+        .trans-hero h1 { font-size: 2rem; }
+        .trans-hero p { font-size: 1rem; }
+        .map-container { height: 300px; }
+      }
+    </style>
+  </head>
+  <body class="main-page">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="topbar-profile" id="profileBtn">Profil</button>
+        <div class="topbar-user-info">
+          <span class="topbar-greeting" id="userGreeting">Hallo!!</span>
+          <span class="topbar-user" id="userName">Nama Mahasiswa</span>
+        </div>
+      </div>
+      <nav class="topbar-nav" aria-label="Menu utama">
+        <div class="nav-item">
+          <a href="main.html">Home</a>
+          <div class="nav-dropdown">
+            <a href="#">Dashboard</a>
+            <a href="#">Profil</a>
+            <a href="#">Pengaturan</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="informasi.html">Informasi</a>
+          <div class="nav-dropdown">
+            <a href="informasi.html">Berita Terbaru</a>
+            <a href="informasi.html">Pengumuman</a>
+            <a href="informasi.html">Agenda</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="pengaduan.html">Pengaduan</a>
+          <div class="nav-dropdown">
+            <a href="pengaduan.html">Ajukan Pengaduan</a>
+            <a href="feedback.html">Riwayat Pengaduan</a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a href="feedback.html">Feedback</a>
+          <div class="nav-dropdown">
+            <a href="feedback.html">Kirim Feedback</a>
+            <a href="feedback.html">Riwayat Feedback</a>
+          </div>
+        </div>
+      </nav>
+      <div class="topbar-actions">
+        <a class="btn" href="Login.html" id="loginBtn">Login</a>
+        <a class="btn btn-primary" href="Login.html#signup" id="signupBtn">Sign Up</a>
+        <button class="hamburger-menu" id="hamburgerBtn">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <button class="settings-menu" id="settingsBtn" style="display: flex !important;">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </header>
+
+    <div class="hamburger-dropdown" id="hamburgerDropdown"></div>
+    <div class="settings-dropdown" id="settingsDropdown">
+      <a href="#" id="editProfileBtn">Edit Profile</a>
+      <a href="#">Setting</a>
+      <button id="logoutBtn">Log Out</button>
+    </div>
+
+    <main class="trans-info">
+      <section class="trans-hero">
+        <h1>🚌 Transportasi Kampus UNESA</h1>
+        <p>Memudahkan mobilitas mahasiswa dengan integrasi layanan Shuttle Bus gratis antar kampus, fasilitas halte yang nyaman, dan titik henti strategis untuk transportasi angkutan umum kota.</p>
+      </section>
+
+      <div class="section-header">
+        <h2>Layanan Transportasi & Akses</h2>
+        <p>Berbagai kemudahan transportasi untuk kelancaran aktivitas Anda</p>
+      </div>
+
+      <div class="features-grid">
+        <a href="#" class="feature-link">
+          <div class="feature-card">
+            <div class="feature-icon">🚐</div>
+            <h3>Shuttle Bus UNESA</h3>
+            <p>Layanan bus kampus gratis yang menghubungkan area Kampus Ketintang dengan Kampus Lidah Wetan secara rutin.</p>
+          </div>
+        </a>
+        <a href="#" class="feature-link">
+          <div class="feature-card">
+            <div class="feature-icon">🚉</div>
+            <h3>Trans Semanggi & Suroboyo Bus</h3>
+            <p>Terdapat titik halte utama di depan kampus yang terintegrasi dengan jaringan transportasi massal Kota Surabaya.</p>
+          </div>
+        </a>
+        <a href="#" class="feature-link">
+          <div class="feature-card">
+            <div class="feature-icon">🚲</div>
+            <h3>Sepeda Kampus</h3>
+            <p>Tersedia stasiun peminjaman sepeda ramah lingkungan yang bisa digunakan mahasiswa secara gratis di dalam lingkungan kampus.</p>
+          </div>
+        </a>
+        <a href="#" class="feature-link">
+          <div class="feature-card">
+            <div class="feature-icon">🅿️</div>
+            <h3>Area Parkir Terpadu</h3>
+            <p>Fasilitas lahan parkir luas, aman, dan tertata rapi yang tersebar di setiap fakultas dan gedung utama.</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="map-section">
+        <h2 style="color: #312e81; margin: 0;">📍 Peta Rute & Titik Halte Transportasi</h2>
+        <p style="color: #64748b; margin-top: 8px;">Jalur rute Shuttle Bus UNESA (Kampus Ketintang ↔ Kampus Lidah Wetan)</p>
+        <div class="map-container">
+          <!-- Embed Google Maps dengan Rute Arah (Directions) berwarna biru -->
+          <iframe src="https://maps.google.com/maps?saddr=Universitas+Negeri+Surabaya+Kampus+Ketintang&daddr=Universitas+Negeri+Surabaya+Kampus+Lidah+Wetan&t=m&z=13&output=embed" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+
+      <div class="access-info">
+        <h3>Informasi Jalur & Jadwal</h3>
+        <p>Cek jadwal keberangkatan agar tidak tertinggal shuttle bus, atau lihat panduan angkutan umum kota menuju UNESA.<br><em>*Syarat menaiki Shuttle Bus: Menunjukkan KTM UNESA yang aktif.</em></p>
+        <div class="action-buttons">
+          <a href="#" class="access-btn" id="btnJadwal">Jadwal Shuttle Bus</a>
+          <a href="#" class="access-btn secondary" id="btnRute">Info Transportasi Umum</a>
+        </div>
+      </div>
+    </main>
+
+    <!-- Modal Info Jadwal Bus -->
+    <div class="modal" id="jadwalModal">
+      <div class="modal-content" style="max-width: 800px; text-align: left;">
+        <span class="modal-close" id="closeJadwal">&times;</span>
+        <h2 style="text-align: left; color: #312e81; margin-bottom: 20px;">🚐 Jadwal Shuttle Bus UNESA</h2>
+        <p style="color: #64748b; font-size: 0.95rem; margin-bottom: 15px;">Rute Penghubung: <strong>Kampus Ketintang ↔ Kampus Lidah Wetan</strong> (Beroperasi Senin - Jumat)</p>
+        <div style="overflow-x: auto;">
+          <table style="width: 100%; border-collapse: collapse; min-width: 600px; font-size: 0.95rem;">
+            <thead>
+              <tr style="background: #4f46e5; color: white;">
+                <th style="padding: 12px; border: 1px solid #e2e8f0; text-align: center;">Sesi</th>
+                <th style="padding: 12px; border: 1px solid #e2e8f0; text-align: center;">Berangkat (Ketintang)</th>
+                <th style="padding: 12px; border: 1px solid #e2e8f0; text-align: center;">Berangkat (Lidah Wetan)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="padding: 12px; border: 1px solid #e2e8f0; text-align: center; font-weight: 600;">Pagi 1</td>
+                <td style="padding: 12px; border: 1px solid #e2e8f0; text-align: center;">07:00 WIB</td>
+                <td style="padding: 12px; border: 1px solid #e2e8f0; text-align: center;">08:15 WIB</td>
+              </tr>
+              <tr style="background: #f8fafc;">
+                <td style="padding: 12px; border: 1px solid #e2e8f0; text-align: center; font-weight: 600;">Pagi 2</td>
+                <td style="padding: 12px; border: 1px solid #e2e8f0; text-align: center;">09:30 WIB</td>
+                <td style="padding: 12px; border: 1px solid #e2e8f0; text-align: center;">10:45 WIB</td>
+              </tr>
+              <tr>
+                <td style="padding: 12px; border: 1px solid #e2e8f0; text-align: center; font-weight: 600;">Siang</td>
+                <td style="padding: 12px; border: 1px solid #e2e8f0; text-align: center;">13:00 WIB</td>
+                <td style="padding: 12px; border: 1px solid #e2e8f0; text-align: center;">14:15 WIB</td>
+              </tr>
+              <tr style="background: #f8fafc;">
+                <td style="padding: 12px; border: 1px solid #e2e8f0; text-align: center; font-weight: 600;">Sore</td>
+                <td style="padding: 12px; border: 1px solid #e2e8f0; text-align: center;">15:30 WIB</td>
+                <td style="padding: 12px; border: 1px solid #e2e8f0; text-align: center;">16:45 WIB</td>
+              </tr>
+            </tbody>
+          </table>
+          <p style="font-size: 0.85rem; color: #dc2626; margin-top: 15px;"><em>*Jadwal di atas bersifat estimasi dan dapat berubah menyesuaikan kondisi lalu lintas.</em></p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Rute Angkutan Umum -->
+    <div class="modal" id="ruteModal">
+      <div class="modal-content" style="max-width: 600px; text-align: left;">
+        <span class="modal-close" id="closeRute">&times;</span>
+        <h2 style="text-align: left; color: #d97706; margin-bottom: 20px;">🗺️ Panduan Transportasi Umum</h2>
+        <div style="margin-bottom: 20px; padding: 16px; background: #fef3c7; border-radius: 12px; border-left: 4px solid #f59e0b;">
+          <h4 style="color: #b45309; margin: 0 0 8px 0; display: flex; align-items: center; gap: 8px;">🚍 Suroboyo Bus (Koridor R1/R2)</h4>
+          <p style="margin: 0; color: #78350f; font-size: 0.95rem; line-height: 1.5;">Turun di <strong>Halte UNESA (Ketintang)</strong> atau <strong>Halte PTC (Lidah Wetan)</strong>. Menerima pembayaran tiket dengan metode QRIS atau menukarkan botol plastik.</p>
+        </div>
+        <div style="margin-bottom: 20px; padding: 16px; background: #eff6ff; border-radius: 12px; border-left: 4px solid #3b82f6;">
+          <h4 style="color: #1e40af; margin: 0 0 8px 0; display: flex; align-items: center; gap: 8px;">🚌 Trans Semanggi Suroboyo</h4>
+          <p style="margin: 0; color: #1e3a8a; font-size: 0.95rem; line-height: 1.5;">Rute kampus Lidah Wetan dilalui oleh Trans Semanggi <strong>Koridor 2</strong> (Lidah Wetan - ITS - Kejawan Putih). Berhenti tepat di Halte Gerbang UNESA Lidah Wetan.</p>
+        </div>
+        <div style="margin-bottom: 10px; padding: 16px; background: #f0fdf4; border-radius: 12px; border-left: 4px solid #10b981;">
+          <h4 style="color: #065f46; margin: 0 0 8px 0; display: flex; align-items: center; gap: 8px;">🚐 Angkutan Kota (Bemo)</h4>
+          <p style="margin: 0; color: #064e3b; font-size: 0.95rem; line-height: 1.5;">Kampus Ketintang dapat dijangkau menggunakan mikrolet jurusan <strong>JTK, DKM, atau H2P</strong> dari terminal Joyoboyo.</p>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <!-- Sama seperti template footer di halaman lain -->
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Contact Us</h3>
+          <p>📞 (031) 5946262</p>
+          <p>📧 info@unesa.ac.id</p>
+          <p>📍 Jl. Ketintang Surabaya</p>
+        </div>
+        <div class="footer-section">
+          <h3>About Campus</h3>
+          <p>UNESA - Universitas Negeri Surabaya</p>
+          <p>Didirikan tahun 1961</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 Universitas Negeri Surabaya. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      const profileBtn = document.getElementById("profileBtn");
+      const settingsDropdown = document.getElementById("settingsDropdown");
+      const settingsBtn = document.getElementById("settingsBtn");
+      const hamburgerBtn = document.getElementById("hamburgerBtn");
+      const hamburgerDropdown = document.getElementById("hamburgerDropdown");
+
+      window.addEventListener("load", () => {
+        const savedName = localStorage.getItem("userName");
+        if (savedName) {
+          const userElement = document.getElementById("userName");
+          if (userElement) userElement.textContent = savedName;
+          const loginBtn = document.getElementById("loginBtn");
+          const signupBtn = document.getElementById("signupBtn");
+          if (loginBtn) loginBtn.style.display = "none";
+          if (signupBtn) signupBtn.style.display = "none";
+        }
+        const settingsBtnElement = document.getElementById("settingsBtn");
+        if (settingsBtnElement) settingsBtnElement.style.display = "flex";
+      });
+
+      profileBtn?.addEventListener('click', () => {
+        settingsDropdown?.classList.toggle('active');
+        hamburgerDropdown?.classList.remove('active');
+      });
+
+      hamburgerBtn?.addEventListener("click", (e) => {
+        e.stopPropagation();
+        hamburgerDropdown?.classList.toggle("active");
+        settingsDropdown?.classList.remove("active");
+      });
+
+      settingsBtn?.addEventListener("click", (e) => {
+        e.stopPropagation();
+        settingsDropdown?.classList.toggle("active");
+        hamburgerDropdown?.classList.remove("active");
+      });
+
+      // Logika Modal Transportasi
+      const btnJadwal = document.getElementById("btnJadwal");
+      const btnRute = document.getElementById("btnRute");
+      const jadwalModal = document.getElementById("jadwalModal");
+      const ruteModal = document.getElementById("ruteModal");
+      const closeJadwal = document.getElementById("closeJadwal");
+      const closeRute = document.getElementById("closeRute");
+
+      btnJadwal?.addEventListener("click", (e) => {
+        e.preventDefault();
+        jadwalModal.style.display = "flex";
+      });
+
+      btnRute?.addEventListener("click", (e) => {
+        e.preventDefault();
+        ruteModal.style.display = "flex";
+      });
+
+      closeJadwal?.addEventListener("click", () => {
+        jadwalModal.style.display = "none";
+      });
+
+      closeRute?.addEventListener("click", () => {
+        ruteModal.style.display = "none";
+      });
+
+      window.addEventListener("click", (e) => {
+        if (!hamburgerDropdown?.contains(e.target) && !hamburgerBtn?.contains(e.target)) {
+          hamburgerDropdown?.classList.remove("active");
+        }
+        if (!settingsDropdown?.contains(e.target) && !profileBtn?.contains(e.target)) {
+          settingsDropdown?.classList.remove("active");
+        }
+        if (e.target === jadwalModal) jadwalModal.style.display = "none";
+        if (e.target === ruteModal) ruteModal.style.display = "none";
+      });
+    </script>
+  </body>
+</html>

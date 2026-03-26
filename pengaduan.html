@@ -1,0 +1,961 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pengaduan - UNESA</title>
+    <link rel="stylesheet" href="main.css" />
+    <style>
+      .pengaduan-container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+        flex: 1;
+      }
+
+      .pengaduan-header {
+        text-align: center;
+        margin-bottom: 24px;
+      }
+
+      .pengaduan-header h1 {
+        color: #1e40af;
+        font-size: 1.5rem;
+        margin-bottom: 8px;
+      }
+
+      .pengaduan-header p {
+        color: #64748b;
+        font-size: 0.9rem;
+      }
+
+      /* Toast Notification */
+      .toast-container {
+        position: fixed;
+        top: 70px;
+        right: 20px;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .toast {
+        padding: 14px 20px;
+        border-radius: 10px;
+        color: white;
+        font-weight: 500;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        animation: slideIn 0.3s ease;
+        max-width: 320px;
+      }
+
+      .toast.success {
+        background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+      }
+
+      .toast.error {
+        background: linear-gradient(135deg, #ef4444 0%, #f87171 100%);
+      }
+
+      .toast.warning {
+        background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+      }
+
+      @keyframes slideIn {
+        from {
+          transform: translateX(100%);
+          opacity: 0;
+        }
+        to {
+          transform: translateX(0);
+          opacity: 1;
+        }
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: #1e40af;
+      }
+
+      .form-group label .required {
+        color: #ef4444;
+      }
+
+      .form-group select,
+      .form-group input[type="text"],
+      .form-group textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px;
+        font-size: 0.95rem;
+        font-family: inherit;
+        transition: border-color 0.2s;
+      }
+
+      .form-group select:focus,
+      .form-group input[type="text"]:focus,
+      .form-group textarea:focus {
+        outline: none;
+        border-color: #3b82f6;
+      }
+
+      .form-group textarea {
+        min-height: 150px;
+        resize: vertical;
+      }
+
+      /* Priority Selection */
+      .priority-options {
+        display: flex;
+        gap: 12px;
+        flex-wrap: wrap;
+        justify-content: space-between;
+      }
+
+      .priority-option {
+        flex: 1;
+        width: 32%;
+        max-width: 32%;
+      }
+
+      .priority-option input {
+        display: none;
+      }
+
+      .priority-option label {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px 10px;
+        border: 2px solid #e2e8f0;
+        border-radius: 8px;
+        cursor: pointer;
+        text-align: center;
+        transition: all 0.2s;
+        font-weight: 500;
+        color: #64748b;
+        width: 100%;
+        height: 100%;
+        min-height: 90px;
+      }
+
+      .priority-option input:checked + label {
+        border-color: #3b82f6;
+        background: #eff6ff;
+        color: #1e40af;
+      }
+
+      .priority-option label:hover {
+        border-color: #3b82f6;
+        background: #f0f7ff;
+      }
+
+      .priority-option .priority-icon {
+        font-size: 1.2rem;
+        display: block;
+        margin-bottom: 4px;
+      }
+
+      .priority-option.high label {
+        border-color: #e2e8f0;
+      }
+
+      .priority-option.high label:hover {
+        border-color: #3b82f6;
+        background: #f0f7ff;
+      }
+
+      .priority-option.high input:checked + label {
+        border-color: #3b82f6;
+        background: #eff6ff;
+        color: #1e40af;
+      }
+
+      /* File Upload */
+      .file-upload {
+        border: 2px dashed #e2e8f0;
+        border-radius: 8px;
+        padding: 20px;
+        text-align: center;
+        cursor: pointer;
+        transition:
+          border-color 0.2s,
+          background 0.2s;
+      }
+
+      .file-upload:hover {
+        border-color: #3b82f6;
+        background: #f8fafc;
+      }
+
+      .file-upload.dragover {
+        border-color: #3b82f6;
+        background: #eff6ff;
+      }
+
+      .file-upload input[type="file"] {
+        display: none;
+      }
+
+      .file-upload-icon {
+        font-size: 2rem;
+        margin-bottom: 8px;
+      }
+
+      .file-upload-text {
+        color: #64748b;
+        font-size: 0.9rem;
+      }
+
+      .file-upload-hint {
+        color: #94a3b8;
+        font-size: 0.8rem;
+        margin-top: 8px;
+      }
+
+      .preview-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 10px;
+      }
+
+      .preview-item {
+        position: relative;
+        width: 100px;
+        height: 100px;
+        border-radius: 8px;
+        overflow: hidden;
+        border: 2px solid #e2e8f0;
+      }
+
+      .preview-item img,
+      .preview-item video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .preview-remove {
+        position: absolute;
+        top: 2px;
+        right: 2px;
+        background: rgba(239, 68, 68, 0.9);
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .file-info {
+        font-size: 0.8rem;
+        color: #64748b;
+        margin-top: 8px;
+      }
+
+      .file-error {
+        color: #ef4444;
+        font-size: 0.8rem;
+        margin-top: 4px;
+      }
+
+      .btn-submit {
+        width: 100%;
+        padding: 14px;
+        background: linear-gradient(135deg, #f59e0b 0%, #fbbf24 100%);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition:
+          transform 0.2s,
+          box-shadow 0.2s;
+      }
+
+      .btn-submit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(245, 158, 11, 0.4);
+      }
+
+      .btn-submit:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      /* Status Badge */
+      .status-badge {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 20px;
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+
+      .status-badge.menunggu {
+        background: #fef3c7;
+        color: #b45309;
+      }
+
+      .status-badge.diproses {
+        background: #dbeafe;
+        color: #1d4ed8;
+      }
+
+      .status-badge.selesai {
+        background: #d1fae5;
+        color: #047857;
+      }
+    </style>
+  </head>
+  <body class="main-page">
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="topbar-profile" id="profileBtn">Profil</button>
+        <div class="topbar-user-info">
+          <span class="topbar-greeting" id="userGreeting">Hallo!!</span>
+          <span class="topbar-user" id="userName">Nama Mahasiswa</span>
+        </div>
+      </div>
+      <nav class="topbar-nav" aria-label="Menu utama">
+        <div class="nav-item">
+          <a href="main.html">Home</a>
+        </div>
+        <div class="nav-item">
+          <a href="informasi.html">Informasi</a>
+        </div>
+        <div class="nav-item">
+          <a href="#">Laporan</a>
+          <div class="nav-dropdown">
+            <a href="pengaduan.html">Ajukan Laporan</a>
+            <a href="feedback.html">Riwayat Laporan</a>
+            <a href="statistik.html">Statistik Laporan</a>
+          </div>
+        </div>
+      </nav>
+      <div class="topbar-actions">
+        <a class="btn" href="Login.html" id="loginBtn">Login</a>
+        <a class="btn btn-primary" href="Login.html#signup" id="signupBtn"
+          >Sign Up</a
+        >
+        <button class="hamburger-menu" id="hamburgerBtn">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+<button class="settings-menu" id="settingsBtn" style="display: flex !important;">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Hamburger Menu Dropdown -->
+    <div class="hamburger-dropdown" id="hamburgerDropdown">
+      <div class="hamburger-nav-item">
+        <a href="main.html">Home</a>
+        <div class="hamburger-nav-dropdown">
+          <a href="#">Dashboard</a>
+          <a href="#">Profil</a>
+          <a href="#">Pengaturan</a>
+        </div>
+      </div>
+      <div class="hamburger-nav-item">
+        <a href="informasi.html">Informasi</a>
+        <div class="hamburger-nav-dropdown">
+          <a href="informasi.html">Berita Terbaru</a>
+          <a href="informasi.html">Pengumuman</a>
+          <a href="informasi.html">Agenda</a>
+        </div>
+      </div>
+      <div class="hamburger-nav-item">
+        <a href="#">Laporan</a>
+        <div class="hamburger-nav-dropdown">
+          <a href="pengaduan.html">Ajukan Laporan</a>
+          <a href="feedback.html">Riwayat Laporan</a>
+          <a href="statistik.html">Statistik Laporan</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Settings Menu Dropdown -->
+    <div class="settings-dropdown" id="settingsDropdown">
+      <a href="#" id="editProfileBtn">Edit Profile</a>
+      <a href="#">Setting</a>
+      <button id="logoutBtn">Log Out</button>
+    </div>
+
+    <!-- Main Content -->
+    <main class="pengaduan-container">
+      <div class="pengaduan-header">
+        <h1>📝 Form Pengaduan Kampus</h1>
+        <p>
+          Sampaikan keluhan atau masalah yang Anda temui di lingkungan kampus
+        </p>
+      </div>
+
+      <form id="pengaduanForm">
+        <div class="form-group">
+          <label for="kategori"
+            >Kategori Laporan <span class="required">*</span></label
+          >
+          <select id="kategori" required>
+            <option value="">-- Pilih Kategori --</option>
+            <option value="Fasilitas Kampus">
+              Fasilitas Kampus (Rusak, Tidak Berfungsi)
+            </option>
+            <option value="Tumpukan Sampah">Tumpukan Sampah</option>
+            <option value="Pencemaran Lingkungan">Pencemaran Lingkungan</option>
+            <option value="Dosen Kurang Profesional">
+              Dosen Kurang Profesional
+            </option>
+            <option value="Keamanan Kampus">Keamanan Kampus</option>
+            <option value="Kebersihan">Kebersihan</option>
+            <option value="Lainnya">Lainnya</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Prioritas Laporan <span class="required">*</span></label>
+          <div class="priority-options">
+            <div class="priority-option">
+              <input
+                type="radio"
+                name="prioritas"
+                id="prioritas-rendah"
+                value="Tidak Mendesak"
+              />
+              <label for="prioritas-rendah">
+                <span class="priority-icon">🟢</span>
+                Tidak Mendesak
+              </label>
+            </div>
+            <div class="priority-option">
+              <input
+                type="radio"
+                name="prioritas"
+                id="prioritas-sedang"
+                value="Biasa"
+                checked
+              />
+              <label for="prioritas-sedang">
+                <span class="priority-icon">🟡</span>
+                Biasa
+              </label>
+            </div>
+            <div class="priority-option high">
+              <input
+                type="radio"
+                name="prioritas"
+                id="prioritas-tinggi"
+                value="Mendesak"
+              />
+              <label for="prioritas-tinggi">
+                <span class="priority-icon">🔴</span>
+                Mendesak
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="lokasi"
+            >Lokasi Kejadian <span class="required">*</span></label
+          >
+          <input
+            type="text"
+            id="lokasi"
+            placeholder="Contoh: gedung A, Lantai 2, Ruang 201"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="deskripsi"
+            >Deskripsi Detail <span class="required">*</span></label
+          >
+          <textarea
+            id="deskripsi"
+            placeholder="Jelaskan secara detail mengenai masalah yang Anda alami..."
+            required
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Unggah Foto/Video</label>
+          <label class="file-upload" for="fileInput" id="fileUploadArea">
+            <div class="file-upload-icon">📎</div>
+            <div class="file-upload-text">
+              Klik untuk memilih file dari komputer<br />(Foto atau Video)
+            </div>
+            <div class="file-upload-hint">Max 10MB per file | Maks 5 file</div>
+            <input
+              type="file"
+              id="fileInput"
+              accept="image/*,video/*"
+              multiple
+            />
+          </label>
+          <div class="preview-container" id="previewContainer"></div>
+          <div class="file-info" id="fileInfo"></div>
+          <div class="file-error" id="fileError"></div>
+        </div>
+
+        <button type="submit" class="btn-submit" id="submitBtn">
+          📤 Kirim Laporan
+        </button>
+      </form>
+    </main>
+
+    <script>
+      const profileBtn = document.getElementById("profileBtn");
+      const fileInput = document.getElementById("fileInput");
+      const previewContainer = document.getElementById("previewContainer");
+      const pengaduanForm = document.getElementById("pengaduanForm");
+      const fileInfo = document.getElementById("fileInfo");
+      const fileError = document.getElementById("fileError");
+      const submitBtn = document.getElementById("submitBtn");
+      const toastContainer = document.getElementById("toastContainer");
+      const fileUploadArea = document.getElementById("fileUploadArea");
+
+      let uploadedFiles = [];
+      const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10MB
+      const MAX_FILES = 5;
+
+      // Toast notification function
+      function showToast(message, type = "success") {
+        const toast = document.createElement("div");
+        toast.className = `toast ${type}`;
+        toast.textContent = message;
+        toastContainer.appendChild(toast);
+
+        setTimeout(() => {
+          toast.style.animation = "slideIn 0.3s ease reverse";
+          setTimeout(() => toast.remove(), 300);
+        }, 3000);
+      }
+
+function isLoggedIn() {
+  return !!localStorage.getItem('userName');
+}
+
+function requireLogin() {
+  showToast('❌ Login diperlukan untuk membuat pengaduan', 'error');
+  setTimeout(() => {
+    window.location.href = 'Login.html';
+  }, 1500);
+}
+
+window.addEventListener("load", () => {
+  if (!isLoggedIn()) {
+    requireLogin();
+    return;
+  }
+  const savedName = localStorage.getItem("userName");
+  
+  // Jika user sudah login (ada userName di localStorage)
+  if (savedName) {
+    const userElement = document.getElementById("userName");
+    if (userElement) {
+      userElement.textContent = savedName;
+    }
+
+    // Jika sudah login, sembunyikan tombol Login dan Sign Up
+    const loginBtn = document.getElementById("loginBtn");
+    const signupBtn = document.getElementById("signupBtn");
+    if (loginBtn) loginBtn.style.display = "none";
+    if (signupBtn) signupBtn.style.display = "none";
+  }
+
+  // Pastikan tombol settings (3 titik) SELALU visible
+  const settingsBtn = document.getElementById("settingsBtn");
+  if (settingsBtn) {
+    settingsBtn.style.display = "flex";
+  }
+});
+
+      const hamburgerBtn = document.getElementById("hamburgerBtn");
+      const hamburgerDropdown = document.getElementById("hamburgerDropdown");
+
+      hamburgerBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        hamburgerDropdown.classList.toggle("active");
+        settingsDropdown.classList.remove("active");
+      });
+
+      window.addEventListener("click", (e) => {
+        if (
+          !hamburgerDropdown.contains(e.target) &&
+          !hamburgerBtn.contains(e.target)
+        ) {
+          hamburgerDropdown.classList.remove("active");
+        }
+      });
+
+      const hamburgerNavItems = document.querySelectorAll(
+        ".hamburger-nav-item > a",
+      );
+      hamburgerNavItems.forEach((item) => {
+        item.addEventListener("click", (e) => {
+          e.stopPropagation();
+          const parent = item.parentElement;
+          parent.classList.toggle("active");
+        });
+      });
+
+      // Navigation dropdown functionality - Tutup dropdown lain saat hover
+      const navItems = document.querySelectorAll('.nav-item');
+      
+      navItems.forEach(item => {
+        item.addEventListener('mouseenter', () => {
+          // Tutup semua dropdown lain
+          navItems.forEach(otherItem => {
+            if (otherItem !== item) {
+              otherItem.classList.remove('active');
+            }
+          });
+          // Buka dropdown ini
+          item.classList.add('active');
+        });
+        
+        item.addEventListener('mouseleave', () => {
+          // Tunda menutup dropdown
+          setTimeout(() => {
+            if (!item.matches(':hover')) {
+              item.classList.remove('active');
+            }
+          }, 200);
+        });
+      });
+
+      const settingsBtn = document.getElementById("settingsBtn");
+      const settingsDropdown = document.getElementById("settingsDropdown");
+
+      settingsBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        settingsDropdown.classList.toggle("active");
+        hamburgerDropdown.classList.remove("active");
+      });
+
+      window.addEventListener("click", (e) => {
+        if (
+          !settingsDropdown.contains(e.target) &&
+          !settingsBtn.contains(e.target)
+        ) {
+          settingsDropdown.classList.remove("active");
+        }
+      });
+
+      // Hide/show logout button based on login status
+      const logoutBtn = document.getElementById("logoutBtn");
+      const updateLogoutVisibility = () => {
+        if (logoutBtn) {
+          logoutBtn.style.display = isLoggedIn() ? 'block' : 'none';
+        }
+      };
+      updateLogoutVisibility();
+
+      // Re-check on load and settings open
+      settingsBtn.addEventListener('click', updateLogoutVisibility);
+
+      // Drag and drop functionality
+      fileUploadArea.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        fileUploadArea.classList.add("dragover");
+      });
+
+      fileUploadArea.addEventListener("dragleave", () => {
+        fileUploadArea.classList.remove("dragover");
+      });
+
+      fileUploadArea.addEventListener("drop", (e) => {
+        e.preventDefault();
+        fileUploadArea.classList.remove("dragover");
+
+        const files = Array.from(e.dataTransfer.files);
+        handleFiles(files);
+      });
+
+      fileInput.addEventListener("change", (e) => {
+        const files = Array.from(e.target.files);
+        handleFiles(files);
+        fileInput.value = "";
+      });
+
+      function handleFiles(files) {
+        fileError.textContent = "";
+
+        files.forEach((file) => {
+          // Validate file size
+          if (file.size > MAX_FILE_SIZE) {
+            fileError.textContent = `File "${file.name}" terlalu besar. Max 10MB per file.`;
+            showToast(`File "${file.name}" terlalu besar!`, "error");
+            return;
+          }
+
+          // Validate file type
+          if (
+            !file.type.startsWith("image/") &&
+            !file.type.startsWith("video/")
+          ) {
+            fileError.textContent = `File "${file.name}" bukan format yang diperbolehkan.`;
+            showToast(`File "${file.name}" bukan gambar/video!`, "error");
+            return;
+          }
+
+          // Check max files
+          if (uploadedFiles.length >= MAX_FILES) {
+            fileError.textContent = `Maksimal ${MAX_FILES} file yang dapat diunggah.`;
+            showToast(`Maksimal ${MAX_FILES} file!`, "warning");
+            return;
+          }
+
+          const fileId = Date.now() + Math.random();
+          const fileData = {
+            id: fileId,
+            file: file,
+            name: file.name,
+            size: file.size,
+            type: file.type.startsWith("video") ? "video" : "image",
+            url: URL.createObjectURL(file),
+          };
+
+          uploadedFiles.push(fileData);
+          renderPreview(fileData);
+        });
+
+        updateFileInfo();
+      }
+
+      function updateFileInfo() {
+        const totalSize = uploadedFiles.reduce((sum, f) => sum + f.size, 0);
+        const sizeMB = (totalSize / (1024 * 1024)).toFixed(2);
+        fileInfo.textContent = `${uploadedFiles.length} file dipilih (${sizeMB} MB)`;
+      }
+
+      function renderPreview(fileData) {
+        const previewItem = document.createElement("div");
+        previewItem.className = "preview-item";
+        previewItem.dataset.id = fileData.id;
+
+        if (fileData.type === "video") {
+          const video = document.createElement("video");
+          video.src = fileData.url;
+          video.controls = true;
+          previewItem.appendChild(video);
+        } else {
+          const img = document.createElement("img");
+          img.src = fileData.url;
+          img.alt = fileData.name;
+          previewItem.appendChild(img);
+        }
+
+        const removeBtn = document.createElement("button");
+        removeBtn.className = "preview-remove";
+        removeBtn.innerHTML = "×";
+        removeBtn.onclick = () => removeFile(fileData.id);
+        previewItem.appendChild(removeBtn);
+
+        previewContainer.appendChild(previewItem);
+      }
+
+      function removeFile(id) {
+        const fileData = uploadedFiles.find((f) => f.id === id);
+        if (fileData) {
+          URL.revokeObjectURL(fileData.url);
+        }
+        uploadedFiles = uploadedFiles.filter((f) => f.id !== id);
+        const previewItem = previewContainer.querySelector(`[data-id="${id}"]`);
+        if (previewItem) {
+          previewItem.remove();
+        }
+        updateFileInfo();
+      }
+
+pengaduanForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+       
+        if (!isLoggedIn()) {
+          requireLogin();
+          return;
+        }
+
+        const kategori = document.getElementById("kategori").value;
+        const lokasi = document.getElementById("lokasi").value;
+        const deskripsi = document.getElementById("deskripsi").value;
+        const prioritas = document.querySelector(
+          'input[name="prioritas"]:checked',
+        ).value;
+
+        if (!kategori || !lokasi || !deskripsi) {
+          showToast("Mohon lengkapi semua field yang wajib diisi!", "error");
+          return;
+        }
+
+        // Disable button during submission
+        submitBtn.disabled = true;
+        submitBtn.textContent = "⏳ Mengirim...";
+
+        const userName = localStorage.getItem("userName") || "Nama Mahasiswa";
+
+        const report = {
+          id: Date.now(),
+          tanggal: new Date().toLocaleDateString("id-ID", {
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+          }),
+          waktu: new Date().toLocaleTimeString("id-ID", {
+            hour: "2-digit",
+            minute: "2-digit",
+          }),
+          kategori: kategori,
+          lokasi: lokasi,
+          deskripsi: deskripsi,
+          prioritas: prioritas,
+          status: "Menunggu",
+          userName: userName,
+          files: [],
+        };
+
+        const filePromises = uploadedFiles.map((fileData) => {
+          return new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onload = () => {
+              resolve({
+                name: fileData.name,
+                type: fileData.type,
+                data: reader.result,
+              });
+            };
+            reader.readAsDataURL(fileData.file);
+          });
+        });
+
+        Promise.all(filePromises)
+          .then((fileResults) => {
+            report.files = fileResults;
+
+            const reports = JSON.parse(
+              localStorage.getItem("pengaduanReports") || "[]",
+            );
+            reports.unshift(report);
+            localStorage.setItem("pengaduanReports", JSON.stringify(reports));
+
+            showToast(
+              "✅ Laporan berhasil dikirim! Terima kasih atas pengaduan Anda.",
+              "success",
+            );
+
+            pengaduanForm.reset();
+            uploadedFiles = [];
+            previewContainer.innerHTML = "";
+            fileInfo.textContent = "";
+            fileError.textContent = "";
+
+            // Reset priority to default
+            document.getElementById("prioritas-sedang").checked = true;
+
+            submitBtn.disabled = false;
+            submitBtn.textContent = "📤 Kirim Laporan";
+
+            // Redirect to history after 2 seconds
+            setTimeout(() => {
+              window.location.href = "feedback.html";
+            }, 2000);
+          })
+          .catch((err) => {
+            showToast(
+              "Terjadi kesalahan saat mengirim laporan. Silakan coba lagi.",
+              "error",
+            );
+            submitBtn.disabled = false;
+            submitBtn.textContent = "📤 Kirim Laporan";
+          });
+      });
+    </script>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Contact Us</h3>
+          <p>📞 (031) 5946262</p>
+          <p>📧 info@unesa.ac.id</p>
+          <p>📍 Jl. Ketintang Surabaya</p>
+        </div>
+        <div class="footer-section">
+          <h3>About Campus</h3>
+          <p>UNESA - Universitas Negeri Surabaya</p>
+          <p>Didirikan tahun 1961</p>
+        </div>
+        <div class="footer-section">
+          <h3>Sosial Media</h3>
+          <div class="social-links">
+            <a
+              href="https://www.youtube.com/@officialunesamagetan"
+              target="_blank"
+              title="YouTube"
+              class="youtube"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+                <path
+                  d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"
+                />
+              </svg>
+            </a>
+            <a
+              href="https://www.facebook.com/people/UNESA-Magetan/61559595083262/"
+              target="_blank"
+              title="Facebook"
+              class="facebook"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+                <path
+                  d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
+                />
+              </svg>
+            </a>
+            <a
+              href="https://www.instagram.com/p/C67tIsbrojb/?utm_source=ig_web_copy_link"
+              target="_blank"
+              title="Instagram"
+              class="instagram"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="white">
+                <path
+                  d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s.644-1.44-1.439-1.44z"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 Universitas Negeri Surabaya. All rights reserved.</p>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sport Center - UNESA</title>
+    <link rel="stylesheet" href="main.css" />
+    <style>
+      .sport-hero {
+        background: linear-gradient(135deg, #10b981 0%, #059669 50%, #047857 100%), radial-gradient(circle at 20% 50%, rgba(255,255,255,0.3) 0%, transparent 50%), radial-gradient(circle at 80% 20%, rgba(255,255,255,0.4) 0%, transparent 50%);
+        background-size: 400% 400%, 100% 100%, 100% 100%;
+        animation: gradientShift 8s ease-in-out infinite, shimmer 3s ease-in-out infinite alternate;
+        border-radius: 25px;
+        padding: 70px 40px;
+        text-align: center;
+        margin-top: -20px;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 40px rgba(16, 185, 129, 0.3);
+        min-height: 450px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 24px;
+        color: white;
+        border: 1px solid rgba(255,255,255,0.2);
+        backdrop-filter: blur(15px);
+      }
+
+      @keyframes gradientShift {
+        0%, 100% { background-position: 0% 50%, center, center; }
+        50% { background-position: 100% 50%, center, center; }
+      }
+
+      @keyframes shimmer {
+        0% { box-shadow: 0 0 20px rgba(255,255,255,0.5); }
+        100% { box-shadow: 0 0 40px rgba(255,255,255,0.8), 0 0 60px rgba(16, 185, 129, 0.4); }
+      }
+
+      .sport-hero h1 {
+        font-size: 2.8rem;
+        font-weight: 900;
+        text-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+        margin: 0;
+        letter-spacing: -0.02em;
+        position: relative;
+        z-index: 2;
+      }
+
+      .sport-hero p {
+        font-size: 1.25rem;
+        max-width: 750px;
+        margin: 0 auto;
+        line-height: 1.7;
+        backdrop-filter: blur(10px);
+        background: rgba(255,255,255,0.1);
+        padding: 20px 30px;
+        border-radius: 20px;
+        border: 1px solid rgba(255,255,255,0.2);
+        position: relative;
+        z-index: 2;
+      }
+
+      .sport-info {
+        max-width: 1200px;
+        margin: 40px auto;
+        padding: 0 20px;
+      }
+
+      .section-header {
+        text-align: center;
+        margin-bottom: 40px;
+      }
+
+      .section-header h2 {
+        color: #064e3b;
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 12px;
+      }
+
+      .section-header p {
+        color: #64748b;
+        font-size: 1.1rem;
+      }
+
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 24px;
+        margin-bottom: 40px;
+      }
+
+      .feature-card {
+        background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+        border-radius: 20px;
+        padding: 32px 24px;
+        text-align: center;
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        border: 1px solid #e2e8f0;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .feature-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background: linear-gradient(90deg, #10b981, #34d399, #059669);
+        background-size: 200% 100%;
+        transform: translateX(-100%);
+        transition: transform 0.6s ease;
+      }
+
+      .feature-card:hover::before {
+        transform: translateX(100%);
+      }
+
+      .feature-card:hover {
+        transform: translateY(-12px) scale(1.02);
+        box-shadow: 0 25px 60px rgba(16, 185, 129, 0.25);
+        border-color: #10b981;
+      }
+
+      .feature-link {
+        text-decoration: none;
+        color: inherit;
+        display: block;
+      }
+
+      .feature-icon {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, #34d399 0%, #059669 100%);
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        font-size: 2.2rem;
+        box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+      }
+
+      .feature-card h3 {
+        color: #064e3b;
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 16px;
+      }
+
+      .feature-card p {
+        color: #64748b;
+        font-size: 1rem;
+        line-height: 1.7;
+        margin: 0;
+      }
+
+      .access-info {
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        border-radius: 20px;
+        padding: 40px;
+        text-align: center;
+        margin-top: 40px;
+      }
+
+      .access-info h3 {
+        color: #064e3b;
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+      }
+
+      .action-buttons {
+        display: flex;
+        gap: 16px;
+        justify-content: center;
+        margin-top: 20px;
+        flex-wrap: wrap;
+      }
+
+      .access-btn {
+        display: inline-block;
+        padding: 14px 32px;
+        background: linear-gradient(135deg, #10b981 0%, #047857 100%);
+        color: white;
+        text-decoration: none;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        transition: all 0.3s;
+        box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+      }
+
+      .access-btn.secondary {
+        background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
+      }
+
+      .access-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 12px 35px rgba(16, 185, 129, 0.5);
+      }
+
+      .access-btn.secondary:hover {
+        box-shadow: 0 12px 35px rgba(245, 158, 11, 0.5);
+      }
+
+      @media (max-width: 768px) {
+        .sport-hero h1 { font-size: 2rem; }
+        .sport-hero p { font-size: 1rem; }
+        .features-grid { grid-template-columns: 1fr; }
+      }
+    </style>
+  </head>
+  <body class="main-page">
+    <header class="topbar">
+      <div class="topbar-left">
+        <button class="topbar-profile" id="profileBtn">Profil</button>
+        <div class="topbar-user-info">
+          <span class="topbar-greeting" id="userGreeting">Hallo!!</span>
+          <span class="topbar-user" id="userName">Nama Mahasiswa</span>
+        </div>
+      </div>
+      <nav class="topbar-nav" aria-label="Menu utama">
+        <div class="nav-item">
+          <a href="main.html">Home</a>
+        </div>
+        <div class="nav-item">
+          <a href="informasi.html">Informasi</a>
+        </div>
+        <div class="nav-item">
+          <a href="pengaduan.html">Pengaduan</a>
+        </div>
+        <div class="nav-item">
+          <a href="feedback.html">Feedback</a>
+        </div>
+      </nav>
+      <div class="topbar-actions">
+        <a class="btn" href="Login.html" id="loginBtn">Login</a>
+        <a class="btn btn-primary" href="Login.html#signup" id="signupBtn">Sign Up</a>
+        <button class="hamburger-menu" id="hamburgerBtn">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+        <button class="settings-menu" id="settingsBtn" style="display: flex !important;">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </header>
+
+    <div class="hamburger-dropdown" id="hamburgerDropdown"></div>
+    <div class="settings-dropdown" id="settingsDropdown">
+      <a href="#" id="editProfileBtn">Edit Profile</a>
+      <a href="#">Setting</a>
+      <button id="logoutBtn">Log Out</button>
+    </div>
+
+    <main class="sport-info">
+      <section class="sport-hero">
+        <h1>🏃 Sport Center UNESA</h1>
+        <p>Pusat fasilitas olahraga terpadu Universitas Negeri Surabaya yang menyediakan berbagai lapangan indoor dan outdoor berstandar nasional untuk mendukung prestasi, kegiatan kemahasiswaan, dan kebugaran civitas akademika.</p>
+      </section>
+
+      <div class="section-header">
+        <h2>Fasilitas Olahraga</h2>
+        <p>Infrastruktur modern yang siap mendukung produktivitas dan kebugaran Anda</p>
+      </div>
+
+      <div class="features-grid">
+        <a href="#" class="feature-link">
+          <div class="feature-card">
+            <div class="feature-icon">🏟️</div>
+            <h3>GOR Indoor Terpadu</h3>
+            <p>Gedung Olahraga multifungsi yang menyediakan lapangan untuk Basket, Futsal, Bola Voli, dan Bulutangkis dengan standar lantai internasional.</p>
+          </div>
+        </a>
+        <a href="#" class="feature-link">
+          <div class="feature-card">
+            <div class="feature-icon">⚽</div>
+            <h3>Lapangan Outdoor</h3>
+            <p>Fasilitas luar ruangan meliputi Lapangan Sepak Bola rumput sintetis, Lintasan Atletik (Tartan), dan Lapangan Tenis.</p>
+          </div>
+        </a>
+        <a href="#" class="feature-link">
+          <div class="feature-card">
+            <div class="feature-icon">🏊</div>
+            <h3>Kolam Renang</h3>
+            <p>Kolam renang berstandar olimpiade yang diperuntukkan bagi mahasiswa Fakultas Ilmu Olahraga, kegiatan UKM, dan umum.</p>
+          </div>
+        </a>
+        <a href="#" class="feature-link">
+          <div class="feature-card">
+            <div class="feature-icon">🏋️</div>
+            <h3>Fitness Center</h3>
+            <p>Pusat kebugaran dengan peralatan angkat beban modern, ruang senam, dan aerobik yang didampingi instruktur profesional.</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="access-info">
+        <h3>Layanan & Operasional</h3>
+        <p>Senin - Minggu: 06.00 - 21.00 WIB<br>Melayani penggunaan perkuliahan olahraga, kegiatan UKM, serta peminjaman mandiri oleh civitas akademika.<br><em>*Wajib mematuhi tata tertib dan menggunakan pakaian olahraga saat berada di area.</em></p>
+        <div class="action-buttons">
+          <a href="#" class="access-btn" id="btnJadwal">Cek Jadwal Lapangan</a>
+          <a href="#" class="access-btn secondary" id="btnPinjam">Form Peminjaman Fasilitas</a>
+        </div>
+      </div>
+    </main>
+
+    <!-- Modal Jadwal -->
+    <div class="modal" id="jadwalModal">
+      <div class="modal-content" style="max-width: 800px; text-align: left;">
+        <span class="modal-close" id="closeJadwal">&times;</span>
+        <h2 style="text-align: left; color: #064e3b; margin-bottom: 20px;">📅 Jadwal Penggunaan Lapangan</h2>
+        <div style="overflow-x: auto;">
+          <table style="width: 100%; border-collapse: collapse; min-width: 600px; font-size: 0.95rem;">
+            <thead>
+              <tr style="background: #047857; color: white;">
+                <th style="padding: 12px; border: 1px solid #e2e8f0; text-align: left;">Hari</th>
+                <th style="padding: 12px; border: 1px solid #e2e8f0; text-align: left;">Waktu</th>
+                <th style="padding: 12px; border: 1px solid #e2e8f0; text-align: left;">Fasilitas</th>
+                <th style="padding: 12px; border: 1px solid #e2e8f0; text-align: left;">Kegiatan</th>
+                <th style="padding: 12px; border: 1px solid #e2e8f0; text-align: left;">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="padding: 12px; border: 1px solid #e2e8f0;">Senin</td>
+                <td style="padding: 12px; border: 1px solid #e2e8f0;">08:00 - 10:00</td>
+                <td style="padding: 12px; border: 1px solid #e2e8f0;">GOR Basket</td>
+                <td style="padding: 12px; border: 1px solid #e2e8f0;">Mata Kuliah Olahraga</td>
+                <td style="padding: 12px; border: 1px solid #e2e8f0;"><span style="background: #fee2e2; color: #dc2626; padding: 4px 8px; border-radius: 12px; font-size: 0.8rem; font-weight: 600;">Digunakan</span></td>
+              </tr>
+              <tr style="background: #f8fafc;">
+                <td style="padding: 12px; border: 1px solid #e2e8f0;">Senin</td>
+                <td style="padding: 12px; border: 1px solid #e2e8f0;">15:00 - 18:00</td>
+                <td style="padding: 12px; border: 1px solid #e2e8f0;">Lapangan Sepak Bola</td>
+                <td style="padding: 12px; border: 1px solid #e2e8f0;">Latihan UKM</td>
+                <td style="padding: 12px; border: 1px solid #e2e8f0;"><span style="background: #fee2e2; color: #dc2626; padding: 4px 8px; border-radius: 12px; font-size: 0.8rem; font-weight: 600;">Digunakan</span></td>
+              </tr>
+              <tr>
+                <td style="padding: 12px; border: 1px solid #e2e8f0;">Selasa</td>
+                <td style="padding: 12px; border: 1px solid #e2e8f0;">10:00 - 12:00</td>
+                <td style="padding: 12px; border: 1px solid #e2e8f0;">Kolam Renang</td>
+                <td style="padding: 12px; border: 1px solid #e2e8f0;">Bebas (Mahasiswa)</td>
+                <td style="padding: 12px; border: 1px solid #e2e8f0;"><span style="background: #d1fae5; color: #059669; padding: 4px 8px; border-radius: 12px; font-size: 0.8rem; font-weight: 600;">Tersedia</span></td>
+              </tr>
+              <tr style="background: #f8fafc;">
+                <td style="padding: 12px; border: 1px solid #e2e8f0;">Rabu</td>
+                <td style="padding: 12px; border: 1px solid #e2e8f0;">16:00 - 18:00</td>
+                <td style="padding: 12px; border: 1px solid #e2e8f0;">GOR Voli</td>
+                <td style="padding: 12px; border: 1px solid #e2e8f0;">Pertandingan Persahabatan</td>
+                <td style="padding: 12px; border: 1px solid #e2e8f0;"><span style="background: #fee2e2; color: #dc2626; padding: 4px 8px; border-radius: 12px; font-size: 0.8rem; font-weight: 600;">Digunakan</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Form Pinjam -->
+    <div class="modal" id="pinjamModal">
+      <div class="modal-content" style="max-width: 500px; text-align: left;">
+        <span class="modal-close" id="closePinjam">&times;</span>
+        <h2 style="text-align: center; color: #064e3b; margin-bottom: 20px;">📝 Form Peminjaman Fasilitas</h2>
+        <form id="formPeminjaman">
+          <div class="field" style="margin-bottom: 15px;">
+            <label for="pinjamNama" style="display: block; margin-bottom: 5px; font-weight: 600;">Nama Lengkap / UKM</label>
+            <input type="text" id="pinjamNama" required style="width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: 8px; font-family: inherit;">
+          </div>
+          <div class="field" style="margin-bottom: 15px;">
+            <label for="pinjamNim" style="display: block; margin-bottom: 5px; font-weight: 600;">NIM / NIP</label>
+            <input type="text" id="pinjamNim" required style="width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: 8px; font-family: inherit;">
+          </div>
+          <div class="field" style="margin-bottom: 15px;">
+            <label style="display: block; margin-bottom: 5px; font-weight: 600;">Fasilitas / Lapangan</label>
+            <select required style="width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: 8px; font-family: inherit;">
+              <option value="">-- Pilih Fasilitas --</option>
+              <option value="GOR Basket">GOR Basket</option>
+              <option value="GOR Voli">GOR Voli</option>
+              <option value="GOR Futsal">GOR Futsal</option>
+              <option value="Lapangan Sepak Bola">Lapangan Sepak Bola</option>
+              <option value="Lapangan Tenis">Lapangan Tenis</option>
+              <option value="Kolam Renang">Kolam Renang</option>
+            </select>
+          </div>
+          <div style="margin-bottom: 15px; display: flex; gap: 10px;">
+            <div class="field" style="flex: 1;">
+              <label style="display: block; margin-bottom: 5px; font-weight: 600;">Tanggal</label>
+              <input type="date" required style="width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: 8px; font-family: inherit;">
+            </div>
+            <div class="field" style="flex: 1;">
+              <label style="display: block; margin-bottom: 5px; font-weight: 600;">Waktu</label>
+              <input type="time" required style="width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: 8px; font-family: inherit;">
+            </div>
+          </div>
+          <div class="field" style="margin-bottom: 20px;">
+            <label style="display: block; margin-bottom: 5px; font-weight: 600;">Keperluan</label>
+            <textarea required rows="3" style="width: 100%; padding: 10px; border: 1px solid #e2e8f0; border-radius: 8px; resize: vertical; font-family: inherit;"></textarea>
+          </div>
+          <button type="submit" style="width: 100%; padding: 12px; background: #10b981; color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 1rem; cursor: pointer; transition: background 0.3s;">Ajukan Peminjaman</button>
+        </form>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <!-- Sama seperti template footer sebelumnya -->
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Contact Us</h3>
+          <p>📞 (031) 5946262</p>
+          <p>📧 info@unesa.ac.id</p>
+          <p>📍 Jl. Ketintang Surabaya</p>
+        </div>
+        <div class="footer-section">
+          <h3>About Campus</h3>
+          <p>UNESA - Universitas Negeri Surabaya</p>
+          <p>Didirikan tahun 1961</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 Universitas Negeri Surabaya. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      const profileBtn = document.getElementById("profileBtn");
+      const settingsDropdown = document.getElementById("settingsDropdown");
+      const settingsBtn = document.getElementById("settingsBtn");
+      const hamburgerBtn = document.getElementById("hamburgerBtn");
+      const hamburgerDropdown = document.getElementById("hamburgerDropdown");
+
+      window.addEventListener("load", () => {
+        const savedName = localStorage.getItem("userName");
+        if (savedName) {
+          const userElement = document.getElementById("userName");
+          if (userElement) userElement.textContent = savedName;
+          const loginBtn = document.getElementById("loginBtn");
+          const signupBtn = document.getElementById("signupBtn");
+          if (loginBtn) loginBtn.style.display = "none";
+          if (signupBtn) signupBtn.style.display = "none";
+        }
+        const settingsBtnElement = document.getElementById("settingsBtn");
+        if (settingsBtnElement) settingsBtnElement.style.display = "flex";
+      });
+
+      profileBtn?.addEventListener('click', () => {
+        settingsDropdown?.classList.toggle('active');
+        hamburgerDropdown?.classList.remove('active');
+      });
+
+      hamburgerBtn?.addEventListener("click", (e) => {
+        e.stopPropagation();
+        hamburgerDropdown?.classList.toggle("active");
+        settingsDropdown?.classList.remove("active");
+      });
+
+      settingsBtn?.addEventListener("click", (e) => {
+        e.stopPropagation();
+        settingsDropdown?.classList.toggle("active");
+        hamburgerDropdown?.classList.remove("active");
+      });
+
+      const btnJadwal = document.getElementById("btnJadwal");
+      const btnPinjam = document.getElementById("btnPinjam");
+      const jadwalModal = document.getElementById("jadwalModal");
+      const pinjamModal = document.getElementById("pinjamModal");
+      const closeJadwal = document.getElementById("closeJadwal");
+      const closePinjam = document.getElementById("closePinjam");
+      const formPeminjaman = document.getElementById("formPeminjaman");
+
+      btnJadwal?.addEventListener("click", (e) => {
+        e.preventDefault();
+        jadwalModal.style.display = "flex";
+      });
+
+      btnPinjam?.addEventListener("click", (e) => {
+        e.preventDefault();
+        const savedName = localStorage.getItem("userName");
+        if (savedName) {
+          const pinjamNama = document.getElementById("pinjamNama");
+          if (pinjamNama) pinjamNama.value = savedName;
+        }
+        pinjamModal.style.display = "flex";
+      });
+
+      closeJadwal?.addEventListener("click", () => {
+        jadwalModal.style.display = "none";
+      });
+
+      closePinjam?.addEventListener("click", () => {
+        pinjamModal.style.display = "none";
+      });
+
+      window.addEventListener("click", (e) => {
+        if (!hamburgerDropdown?.contains(e.target) && !hamburgerBtn?.contains(e.target)) {
+          hamburgerDropdown?.classList.remove("active");
+        }
+        if (!settingsDropdown?.contains(e.target) && !profileBtn?.contains(e.target)) {
+          settingsDropdown?.classList.remove("active");
+        }
+        if (e.target === jadwalModal) jadwalModal.style.display = "none";
+        if (e.target === pinjamModal) pinjamModal.style.display = "none";
+      });
+
+      formPeminjaman?.addEventListener("submit", (e) => {
+        e.preventDefault();
+        alert("Pengajuan peminjaman lapangan berhasil dikirim! Silakan tunggu konfirmasi dari pengelola Sport Center.");
+        pinjamModal.style.display = "none";
+        formPeminjaman.reset();
+      });
+    </script>
+  </body>
+</html>

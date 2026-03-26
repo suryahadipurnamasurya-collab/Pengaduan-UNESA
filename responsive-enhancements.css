@@ -1,0 +1,99 @@
+/* Responsive Enhancements - Added for fluid scaling across all devices */
+
+/* Base improvements */
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Fluid typography */
+body {
+  font-size: clamp(0.8rem, 4vw, 1rem);
+  line-height: 1.5;
+}
+
+h1 { font-size: clamp(1.5rem, 5vw, 2.5rem); line-height: 1.1; }
+h2 { font-size: clamp(1.25rem, 4vw, 1.75rem); line-height: 1.2; }
+h3 { font-size: clamp(1rem, 3vw, 1.25rem); }
+
+/* Topbar touch optimization */
+.topbar-profile,
+.hamburger-menu,
+.settings-menu {
+  min-width: 48px;
+  min-height: 48px;
+}
+
+@media (max-width: 360px) {
+  body.main-page {
+    padding-top: 55px;
+  }
+.topbar {
+    padding: 0 clamp(4px, 4vw, 16px);
+    font-size: clamp(0.7rem, 3vw, 0.85rem);
+  }
+  .card {
+    margin: 0 5px;
+    max-width: calc(100vw - 10px);
+  }
+}
+
+/* Mobile-first grids - single column by default */
+.info-cards,
+.fakultas-grid,
+.stats-grid,
+.home-grid,
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(8px, 4vw, 16px);
+}
+
+@media (min-width: 600px) {
+  .info-cards,
+  .stats-grid,
+  .home-grid,
+  .footer-content {
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    display: grid;
+  }
+}
+
+@media (min-width: 1200px) {
+  .info-cards,
+  .stats-grid,
+  .home-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* Hero improvements */
+.hero-section {
+  padding: clamp(40px, 10vw, 90px) clamp(16px, 5vw, 40px);
+}
+
+/* Login card on tiny screens */
+@media (max-width: 360px) {
+  .card {
+    max-height: 95vh;
+  }
+  body.login-page {
+    padding: 10px;
+  }
+}
+
+/* Footer on wide screens */
+@media (min-width: 1400px) {
+  .footer-content {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
