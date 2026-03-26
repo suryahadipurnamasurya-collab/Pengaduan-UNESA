@@ -9,7 +9,7 @@
   <body class="login-page">
     <div class="card" aria-label="Masuk Akun">
       <header class="card-header">
-        <a class="back-btn" href="index.html">←</a>
+        <a class="back-btn" href="main.html">←</a>
         <h1 id="page-title">Login</h1>
         <div class="tab-nav" role="tablist">
           <button
@@ -195,11 +195,24 @@
         event.preventDefault();
 
         const email = document.getElementById("login-email").value;
+        const password = document.getElementById("login-password").value;
 
-        if (email) {
-          localStorage.setItem("userEmail", email);
+        const storedEmail = localStorage.getItem("accountEmail");
+        const storedPassword = localStorage.getItem("accountPassword");
+        const storedName = localStorage.getItem("accountName");
+
+        if (!storedEmail || !storedPassword) {
+          alert("Akun belum terdaftar. Silakan Sign up terlebih dahulu.");
+          return;
         }
 
+        if (email !== storedEmail || password !== storedPassword) {
+          alert("Email atau Password salah!");
+          return;
+        }
+
+        // Jika cocok, set session login
+        localStorage.setItem("userName", storedName);
         window.location.href = "main.html";
       });
 
@@ -208,12 +221,19 @@
         const password = document.getElementById("signup-password").value;
         const confirm = document.getElementById("signup-confirm").value;
         const name = document.getElementById("signup-name").value;
+        const email = document.getElementById("signup-email").value;
 
         if (password !== confirm) {
           alert("Password dan konfirmasi tidak cocok.");
           return;
         }
 
+        // Simpan data akun untuk keperluan login berikutnya
+        localStorage.setItem("accountEmail", email);
+        localStorage.setItem("accountPassword", password);
+        localStorage.setItem("accountName", name);
+
+        // Auto-login setelah signup selesai
         localStorage.setItem("userName", name);
 
         window.location.href = "main.html";

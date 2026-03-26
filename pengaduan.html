@@ -350,7 +350,6 @@
           <div class="nav-dropdown">
             <a href="pengaduan.html">Ajukan Laporan</a>
             <a href="feedback.html">Riwayat Laporan</a>
-            <a href="statistik.html">Statistik Laporan</a>
           </div>
         </div>
       </nav>
@@ -395,7 +394,6 @@
         <div class="hamburger-nav-dropdown">
           <a href="pengaduan.html">Ajukan Laporan</a>
           <a href="feedback.html">Riwayat Laporan</a>
-          <a href="statistik.html">Statistik Laporan</a>
         </div>
       </div>
     </div>
@@ -403,14 +401,13 @@
     <!-- Settings Menu Dropdown -->
     <div class="settings-dropdown" id="settingsDropdown">
       <a href="#" id="editProfileBtn">Edit Profile</a>
-      <a href="#">Setting</a>
       <button id="logoutBtn">Log Out</button>
     </div>
 
     <!-- Main Content -->
     <main class="pengaduan-container">
       <div class="pengaduan-header">
-        <h1>📝 Form Pengaduan Kampus</h1>
+        <h1> Form Pengaduan Kampus</h1>
         <p>
           Sampaikan keluhan atau masalah yang Anda temui di lingkungan kampus
         </p>
@@ -569,6 +566,16 @@ function requireLogin() {
 }
 
 window.addEventListener("load", () => {
+  const savedPhoto = localStorage.getItem("profilePhoto");
+  const savedZoom = parseInt(localStorage.getItem("profileZoom")) || 100;
+  if (savedPhoto && profileBtn) {
+    profileBtn.style.backgroundImage = `url(${savedPhoto})`;
+    profileBtn.style.backgroundSize = `${savedZoom}%`;
+    profileBtn.style.backgroundPosition = "center";
+    profileBtn.style.color = "transparent";
+    profileBtn.style.border = "none";
+  }
+
   if (!isLoggedIn()) {
     requireLogin();
     return;
@@ -892,7 +899,7 @@ pengaduanForm.addEventListener("submit", (e) => {
               "error",
             );
             submitBtn.disabled = false;
-            submitBtn.textContent = "📤 Kirim Laporan";
+            submitBtn.textContent = " Kirim Laporan";
           });
       });
     </script>

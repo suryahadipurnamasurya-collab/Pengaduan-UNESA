@@ -638,7 +638,6 @@
           <div class="nav-dropdown">
             <a href="pengaduan.html">Ajukan Laporan</a>
             <a href="feedback.html">Riwayat Laporan</a>
-            <a href="statistik.html">Statistik Laporan</a>
           </div>
         </div>
       </nav>
@@ -681,7 +680,6 @@
         <div class="hamburger-nav-dropdown">
           <a href="pengaduan.html">Ajukan Laporan</a>
           <a href="feedback.html">Riwayat Laporan</a>
-          <a href="statistik.html">Statistik Laporan</a>
         </div>
       </div>
     </div>
@@ -689,7 +687,6 @@
     <!-- Settings Menu Dropdown -->
     <div class="settings-dropdown" id="settingsDropdown">
       <a href="#" id="editProfileBtn">Edit Profile</a>
-      <a href="#">Setting</a>
       <button id="logoutBtn">Log Out</button>
     </div>
 
@@ -697,7 +694,7 @@
     <main class="informasi-container">
       <!-- Hero Header -->
       <div class="info-header">
-        <h1>🏛️ Informasi Kampus UNESA</h1>
+        <h1> Informasi Kampus UNESA</h1>
         <div class="hero-subtitle">
           <p>Ketahui segala informasi terkini tentang Universitas Negeri Surabaya</p>
         </div>
@@ -762,7 +759,7 @@
       <!-- News Section - Berita & Pengumuman -->
       <section class="info-section news-section">
         <div class="section-header">
-          <h2>📰 Berita & Pengumuman</h2>
+          <h2> Berita & Pengumuman</h2>
           <p>Informasi terbaru dari lingkungan kampus</p>
         </div>
         <div class="news-grid">
@@ -820,7 +817,7 @@
       <!-- Achievements Section - Prestasi -->
       <section class="info-section achievements-section">
         <div class="section-header">
-          <h2>🏆 Prestasi UNESA</h2>
+          <h2> Prestasi UNESA</h2>
           <p>Capaian membanggakan dari civitas akademika UNESA</p>
         </div>
         <div class="achievements-grid">
@@ -850,7 +847,7 @@
       <!-- Facilities Section - Fasilitas -->
       <section class="info-section facilities-section">
         <div class="section-header">
-          <h2>🏫 Fasilitas Kampus</h2>
+          <h2> Fasilitas Kampus</h2>
           <p>Fasilitas pendukung kenyamanan belajar</p>
         </div>
         <div class="facilities-grid">
@@ -926,6 +923,16 @@
 
       // Load user data on page load
       window.addEventListener("load", () => {
+        const savedPhoto = localStorage.getItem("profilePhoto");
+        const savedZoom = parseInt(localStorage.getItem("profileZoom")) || 100;
+        if (savedPhoto && profileBtn) {
+          profileBtn.style.backgroundImage = `url(${savedPhoto})`;
+          profileBtn.style.backgroundSize = `${savedZoom}%`;
+          profileBtn.style.backgroundPosition = "center";
+          profileBtn.style.color = "transparent";
+          profileBtn.style.border = "none";
+        }
+
         const savedName = localStorage.getItem("userName");
         
         if (savedName) {
@@ -1062,7 +1069,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p>© 2024 Universitas Negeri Surabaya. All rights reserved.</p>
+        <p>© 2026 Universitas Negeri Surabaya. All rights reserved.</p>
       </div>
     </footer>
   </body>

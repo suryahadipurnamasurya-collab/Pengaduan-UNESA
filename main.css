@@ -404,6 +404,14 @@ body.main-page {
   .card-body {
     padding: 1.25rem;
   }
+
+  /* Memperkecil foto profil di mode mobile */
+  .topbar-profile {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    min-height: 32px;
+  }
 }
 
 /* Modal Styles */
@@ -1179,3 +1187,65 @@ body.main-page {
     left: 5px;
   }
 }
+/* Menampilkan info user dan nama pada tampilan mobile (Android/Smartphone) */
+@media (max-width: 768px) {
+  .topbar-user-info {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  /* Membatasi lebar teks agar tidak merusak layout topbar jika nama panjang */
+  .topbar-user {
+    max-width: 100px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.8rem;
+  }
+  
+  .topbar-greeting {
+    font-size: 0.7rem;
+  }
+}
+
+/* Penyesuaian ekstra untuk layar ponsel yang lebih sempit */
+@media (max-width: 480px) {
+  .topbar-user {
+    max-width: 75px;
+  }
+
+  /* Memperkecil lagi foto profil di layar sangat sempit */
+  .topbar-profile {
+    width: 28px;
+    height: 28px;
+    min-width: 28px;
+    min-height: 28px;
+  }
+}
+
+/* Toggle Switch */
+.switch { position: relative; display: inline-block; width: 44px; height: 24px; }
+.switch input { opacity: 0; width: 0; height: 0; }
+.slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #cbd5e1; transition: .4s; }
+.slider:before { position: absolute; content: ""; height: 16px; width: 16px; left: 4px; bottom: 4px; background-color: white; transition: .4s; }
+input:checked + .slider { background-color: #1e40af; }
+input:checked + .slider:before { transform: translateX(20px); }
+.slider.round { border-radius: 24px; }
+.slider.round:before { border-radius: 50%; }
+
+/* Color Blindness Filters */
+body.cb-achromatopsia { filter: grayscale(100%); }
+body.cb-protanopia { filter: sepia(30%) hue-rotate(-15deg) saturate(120%); }
+body.cb-tritanopia { filter: sepia(30%) hue-rotate(135deg) saturate(120%); }
+
+/* Dark Mode */
+body.dark-mode { background-color: #0f172a !important; color: #f8fafc !important; }
+body.dark-mode .card, body.dark-mode .modal-content, body.dark-mode .feature-card, body.dark-mode .info-card, body.dark-mode .fakultas-card, body.dark-mode .news-card, body.dark-mode .facility-card, body.dark-mode .report-card, body.dark-mode .feedback-card, body.dark-mode .detail-content { background: #1e293b !important; color: #f8fafc !important; border-color: #334155 !important; }
+body.dark-mode h1, body.dark-mode h2, body.dark-mode h3, body.dark-mode h4, body.dark-mode p, body.dark-mode span, body.dark-mode label, body.dark-mode td, body.dark-mode th { color: #f1f5f9 !important; }
+body.dark-mode .topbar { background: #0f172a !important; border-bottom-color: #1e293b !important; box-shadow: 0 4px 12px rgba(0,0,0,0.5); }
+body.dark-mode .footer { background: #0f172a !important; border-top: 1px solid #1e293b; }
+body.dark-mode .section-header p, body.dark-mode .feature-card p, body.dark-mode .info-card p { color: #cbd5e1 !important; }
+body.dark-mode .hamburger-dropdown, body.dark-mode .settings-dropdown, body.dark-mode .nav-dropdown { background: #1e293b !important; box-shadow: 0 8px 24px rgba(0,0,0,0.6); }
+body.dark-mode .hamburger-dropdown a, body.dark-mode .settings-dropdown a, body.dark-mode .settings-dropdown button { color: #f8fafc !important; border-bottom-color: #334155 !important; }
+body.dark-mode .hamburger-dropdown a:hover, body.dark-mode .settings-dropdown a:hover, body.dark-mode .settings-dropdown button:hover { background: rgba(255,255,255,0.1) !important; color: #60a5fa !important; }
