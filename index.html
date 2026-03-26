@@ -179,35 +179,6 @@
         font-weight: 500;
       }
 
-      .featured-section {
-        padding: 20px 20px 40px;
-        max-width: 1200px;
-        margin: 0 auto;
-      }
-
-      .section-title {
-        text-align: center;
-        font-size: 1.5rem;
-        color: #1e3a8a;
-        margin-bottom: 24px;
-        font-weight: 700;
-      }
-
-      /* Kelas Kustom & Responsif Untuk Halaman Utama */
-      .home-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 16px;
-        max-width: 1200px;
-        margin: 0 auto 24px;
-        padding: 0 16px;
-      }
-      .home-info-card {
-        background: white; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-      }
-      .home-fakultas-card {
-        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 12px; padding: 20px; text-align: center; border: 1px solid #e2e8f0;
-      }
       .hero-welcome-container {
         display: flex; align-items: center; justify-content: center; gap: 16px; margin-bottom: 16px;
       }
@@ -220,7 +191,7 @@
 
       /* Adaptasi Untuk Layar Tablet */
       @media (max-width: 1024px) {
-        .stats-grid, .home-grid { grid-template-columns: repeat(2, 1fr); }
+        .stats-grid { grid-template-columns: repeat(2, 1fr); }
         .hero-mascot { width: 250px; height: auto; right: 75%; top: 60%; }
       }
       
@@ -251,12 +222,11 @@
       
       /* Adaptasi Untuk Smartphone / Android */
       @media (max-width: 480px) {
-        .stats-grid, .home-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
         .stat-card { padding: 16px 10px; }
         .stat-card .stat-icon { width: 40px; height: 40px; font-size: 1.2rem; margin-bottom: 8px; }
         .stat-card .stat-number { font-size: 1.2rem; }
         .stat-card .stat-label { font-size: 0.7rem; }
-        .home-info-card, .home-fakultas-card { padding: 12px; }
         .hero-welcome-title { font-size: 1.6rem; }
       }
     </style>
@@ -371,56 +341,6 @@
             <div class="stat-icon">🏆</div>
             <div class="stat-number">100+</div>
             <div class="stat-label">Prestasi Nasional</div>
-          </div>
-        </div>
-      </section>
-
-      <section class="featured-section">
-        <h2 class="section-title">Informasi Kampus</h2>
-        <div class="home-grid">
-          <div class="home-info-card">
-            <div style="font-size: 2rem; margin-bottom: 8px;">📚</div>
-            <h3 style="color: #1e40af; font-size: 0.9rem; margin-bottom: 4px;">Akademik</h3>
-            <p style="color: #64748b; font-size: 0.75rem; margin: 0;">Info kurikulum & jadwal</p>
-          </div>
-          <div class="home-info-card">
-            <div style="font-size: 2rem; margin-bottom: 8px;">📢</div>
-            <h3 style="color: #1e40af; font-size: 0.9rem; margin-bottom: 4px;">Pengumuman</h3>
-            <p style="color: #64748b; font-size: 0.75rem; margin: 0;">Pengumuman penting</p>
-          </div>
-          <div class="home-info-card">
-            <div style="font-size: 2rem; margin-bottom: 8px;">🏆</div>
-            <h3 style="color: #1e40af; font-size: 0.9rem; margin-bottom: 4px;">Prestasi</h3>
-            <p style="color: #64748b; font-size: 0.75rem; margin: 0;">Prestasi mahasiswa</p>
-          </div>
-          <div class="home-info-card">
-            <div style="font-size: 2rem; margin-bottom: 8px;">🎯</div>
-            <h3 style="color: #1e40af; font-size: 0.9rem; margin-bottom: 4px;">Event</h3>
-            <p style="color: #64748b; font-size: 0.75rem; margin: 0;">Acara kampus</p>
-          </div>
-        </div>
-
-        <h2 class="section-title">Fakultas</h2>
-        <div class="home-grid">
-          <div class="home-fakultas-card">
-            <div style="font-size: 2rem; margin-bottom: 8px;">🎓</div>
-            <h3 style="color: #1e40af; font-size: 0.8rem; margin: 0; font-weight: 600;">FT</h3>
-            <p style="color: #64748b; font-size: 0.7rem; margin: 4px 0 0;">Fakultas Teknik</p>
-          </div>
-          <div class="home-fakultas-card">
-            <div style="font-size: 2rem; margin-bottom: 8px;">📖</div>
-            <h3 style="color: #1e40af; font-size: 0.8rem; margin: 0; font-weight: 600;">FIP</h3>
-            <p style="color: #64748b; font-size: 0.7rem; margin: 4px 0 0;">Fakultas Ilmu Pendidikan</p>
-          </div>
-          <div class="home-fakultas-card">
-            <div style="font-size: 2rem; margin-bottom: 8px;">💼</div>
-            <h3 style="color: #1e40af; font-size: 0.8rem; margin: 0; font-weight: 600;">FE</h3>
-            <p style="color: #64748b; font-size: 0.7rem; margin: 4px 0 0;">Fakultas Ekonomi</p>
-          </div>
-          <div class="home-fakultas-card">
-            <div style="font-size: 2rem; margin-bottom: 8px;">🎨</div>
-            <h3 style="color: #1e40af; font-size: 0.8rem; margin: 0; font-weight: 600;">FS</h3>
-            <p style="color: #64748b; font-size: 0.7rem; margin: 4px 0 0;">Fakultas Sastra</p>
           </div>
         </div>
       </section>

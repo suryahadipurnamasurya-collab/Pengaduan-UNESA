@@ -256,7 +256,16 @@
       </div>
     </header>
 
-    <div class="hamburger-dropdown" id="hamburgerDropdown"></div>
+    <div class="hamburger-dropdown" id="hamburgerDropdown">
+      <div class="hamburger-nav-item"><a href="main.html">Home</a></div>
+      <div class="hamburger-nav-item"><a href="informasi.html">Informasi</a></div>
+      <div class="hamburger-nav-item"><a href="pengaduan.html">Pengaduan</a></div>
+      <div class="hamburger-nav-item"><a href="feedback.html">Feedback</a></div>
+      <div class="hamburger-nav-item auth-mobile">
+        <a href="Login.html" id="hamLoginBtn">Login</a>
+        <a href="Login.html#signup" id="hamSignupBtn">Sign Up</a>
+      </div>
+    </div>
     <div class="settings-dropdown" id="settingsDropdown">
       <a href="#" id="editProfileBtn">Edit Profile</a>
       <a href="#">Setting</a>
@@ -445,9 +454,17 @@
           const signupBtn = document.getElementById("signupBtn");
           if (loginBtn) loginBtn.style.display = "none";
           if (signupBtn) signupBtn.style.display = "none";
+          const hamLoginBtn = document.getElementById("hamLoginBtn");
+          const hamSignupBtn = document.getElementById("hamSignupBtn");
+          if (hamLoginBtn) hamLoginBtn.style.display = "none";
+          if (hamSignupBtn) hamSignupBtn.style.display = "none";
         }
         const settingsBtnElement = document.getElementById("settingsBtn");
         if (settingsBtnElement) settingsBtnElement.style.display = "flex";
+      });
+
+      document.querySelectorAll('.hamburger-nav-item > a').forEach(item => {
+        item.addEventListener('click', (e) => { e.stopPropagation(); item.parentElement.classList.toggle('active'); });
       });
 
       profileBtn?.addEventListener('click', () => {
